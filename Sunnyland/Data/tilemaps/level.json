@@ -1,0 +1,400 @@
+{ "compressionlevel":-1,
+ "height":15,
+ "infinite":false,
+ "layers":[
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            27, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 31,
+            77, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 81,
+            127, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 131],
+         "height":15,
+         "id":1,
+         "name":"Ground",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":24,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 177, 0, 0, 0, 179, 0, 0, 0, 0, 187, 185, 0, 0, 0, 177, 0, 0, 0, 261, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":15,
+         "id":2,
+         "name":"Nature",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":24,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":5,
+         "name":"Collectables",
+         "objects":[
+                {
+                 "height":0,
+                 "id":12,
+                 "name":"Cherry",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"cell height",
+                         "type":"int",
+                         "value":21
+                        }, 
+                        {
+                         "name":"cell width",
+                         "type":"int",
+                         "value":21
+                        }, 
+                        {
+                         "name":"texture path",
+                         "type":"string",
+                         "value":"items\/cherry"
+                        }, 
+                        {
+                         "name":"x origin",
+                         "type":"int",
+                         "value":5
+                        }, 
+                        {
+                         "name":"y origin",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":128,
+                 "y":176
+                }, 
+                {
+                 "height":0,
+                 "id":13,
+                 "name":"Gem",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"cell height",
+                         "type":"int",
+                         "value":13
+                        }, 
+                        {
+                         "name":"cell width",
+                         "type":"int",
+                         "value":15
+                        }, 
+                        {
+                         "name":"texture path",
+                         "type":"string",
+                         "value":"items\/gem"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":176,
+                 "y":176
+                }, 
+                {
+                 "height":0,
+                 "id":14,
+                 "name":"Gem",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"cell height",
+                         "type":"int",
+                         "value":13
+                        }, 
+                        {
+                         "name":"cell width",
+                         "type":"int",
+                         "value":15
+                        }, 
+                        {
+                         "name":"texture path",
+                         "type":"string",
+                         "value":"items\/gem"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":208,
+                 "y":176
+                }, 
+                {
+                 "height":0,
+                 "id":15,
+                 "name":"Gem",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"cell height",
+                         "type":"int",
+                         "value":13
+                        }, 
+                        {
+                         "name":"cell width",
+                         "type":"int",
+                         "value":15
+                        }, 
+                        {
+                         "name":"texture path",
+                         "type":"string",
+                         "value":"items\/gem"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":240,
+                 "y":176
+                }, 
+                {
+                 "height":0,
+                 "id":16,
+                 "name":"Gem",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"cell height",
+                         "type":"int",
+                         "value":13
+                        }, 
+                        {
+                         "name":"cell width",
+                         "type":"int",
+                         "value":15
+                        }, 
+                        {
+                         "name":"texture path",
+                         "type":"string",
+                         "value":"items\/gem"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":272,
+                 "y":176
+                }, 
+                {
+                 "height":0,
+                 "id":17,
+                 "name":"Cherry",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"cell height",
+                         "type":"int",
+                         "value":21
+                        }, 
+                        {
+                         "name":"cell width",
+                         "type":"int",
+                         "value":21
+                        }, 
+                        {
+                         "name":"texture path",
+                         "type":"string",
+                         "value":"items\/cherry"
+                        }, 
+                        {
+                         "name":"x origin",
+                         "type":"int",
+                         "value":5
+                        }, 
+                        {
+                         "name":"y origin",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":96,
+                 "y":176
+                }, 
+                {
+                 "height":0,
+                 "id":30,
+                 "name":"Cherry",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"cell height",
+                         "type":"int",
+                         "value":21
+                        }, 
+                        {
+                         "name":"cell width",
+                         "type":"int",
+                         "value":21
+                        }, 
+                        {
+                         "name":"texture path",
+                         "type":"string",
+                         "value":"items\/cherry"
+                        }, 
+                        {
+                         "name":"x origin",
+                         "type":"int",
+                         "value":5
+                        }, 
+                        {
+                         "name":"y origin",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":336,
+                 "y":144
+                }, 
+                {
+                 "height":0,
+                 "id":31,
+                 "name":"Gem",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"cell height",
+                         "type":"int",
+                         "value":13
+                        }, 
+                        {
+                         "name":"cell width",
+                         "type":"int",
+                         "value":15
+                        }, 
+                        {
+                         "name":"texture path",
+                         "type":"string",
+                         "value":"items\/gem"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":368,
+                 "y":144
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":false,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":3,
+         "name":"Characters",
+         "objects":[
+                {
+                 "height":0,
+                 "id":1,
+                 "name":"Player",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"cell height",
+                         "type":"int",
+                         "value":32
+                        }, 
+                        {
+                         "name":"cell width",
+                         "type":"int",
+                         "value":33
+                        }, 
+                        {
+                         "name":"speed",
+                         "type":"int",
+                         "value":56
+                        }, 
+                        {
+                         "name":"texture path",
+                         "type":"string",
+                         "value":"Characters\/Foxy\/atlas"
+                        }, 
+                        {
+                         "name":"x origin",
+                         "type":"int",
+                         "value":16
+                        }, 
+                        {
+                         "name":"y origin",
+                         "type":"int",
+                         "value":32
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":48,
+                 "y":192
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }],
+ "nextlayerid":6,
+ "nextobjectid":32,
+ "orientation":"orthogonal",
+ "renderorder":"right-down",
+ "tiledversion":"1.11.2",
+ "tileheight":16,
+ "tilesets":[
+        {
+         "columns":25,
+         "firstgid":1,
+         "image":"..\/..\/Content\/environment\/tileset.png",
+         "imageheight":368,
+         "imagewidth":400,
+         "margin":0,
+         "name":"tileset",
+         "spacing":0,
+         "tilecount":575,
+         "tileheight":16,
+         "tilewidth":16
+        }],
+ "tilewidth":16,
+ "type":"map",
+ "version":"1.10",
+ "width":24
+}
