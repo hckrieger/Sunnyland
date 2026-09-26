@@ -63,6 +63,7 @@
                  "height":0,
                  "id":12,
                  "name":"Cherry",
+                 "opacity":1,
                  "point":true,
                  "properties":[
                         {
@@ -101,6 +102,7 @@
                  "height":0,
                  "id":13,
                  "name":"Gem",
+                 "opacity":1,
                  "point":true,
                  "properties":[
                         {
@@ -129,6 +131,7 @@
                  "height":0,
                  "id":14,
                  "name":"Gem",
+                 "opacity":1,
                  "point":true,
                  "properties":[
                         {
@@ -157,6 +160,7 @@
                  "height":0,
                  "id":15,
                  "name":"Gem",
+                 "opacity":1,
                  "point":true,
                  "properties":[
                         {
@@ -185,6 +189,7 @@
                  "height":0,
                  "id":16,
                  "name":"Gem",
+                 "opacity":1,
                  "point":true,
                  "properties":[
                         {
@@ -213,6 +218,7 @@
                  "height":0,
                  "id":17,
                  "name":"Cherry",
+                 "opacity":1,
                  "point":true,
                  "properties":[
                         {
@@ -251,6 +257,7 @@
                  "height":0,
                  "id":30,
                  "name":"Cherry",
+                 "opacity":1,
                  "point":true,
                  "properties":[
                         {
@@ -289,6 +296,7 @@
                  "height":0,
                  "id":31,
                  "name":"Gem",
+                 "opacity":1,
                  "point":true,
                  "properties":[
                         {
@@ -328,6 +336,7 @@
                  "height":0,
                  "id":1,
                  "name":"Player",
+                 "opacity":1,
                  "point":true,
                  "properties":[
                         {
@@ -377,7 +386,7 @@
  "nextobjectid":32,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.11.2",
+ "tiledversion":"1.12.2",
  "tileheight":16,
  "tilesets":[
         {

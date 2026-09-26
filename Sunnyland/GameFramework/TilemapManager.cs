@@ -113,7 +113,8 @@ namespace Sunnyland.GameFramework
 		public int TileWidth { get; set; }
 		public int TileHeight { get; set; }
 
-
+		public int TileRows => Height / TileHeight;
+		public int TileColumns => Width / TileWidth;
 		public List<TileLayer> Layers { get; set; } = [];
 		public List<TileSet> TileSets { get; set; } = [];
 	}

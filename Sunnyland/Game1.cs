@@ -162,7 +162,7 @@ namespace Sunnyland
 
 			displayManager = new DisplayManager(_graphics)
 			{
-				IsFullScreen = true
+				IsFullScreen = false
 			};
 				
 			SetWindowSize(384, 240, 3);

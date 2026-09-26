@@ -14,17 +14,30 @@ namespace Sunnyland
 	public class PlayerController
 	{
 		private RenderableData data;
+		private int feetMargin = 3;
 
+		private float gravity = 75;
+		public Rectangle BoundingBox
+		{
+			get
+			{
+				Rectangle localRectangle = new Rectangle(6, 10, 18, 22);
 
+				Vector2 position = data.Position[id] - data.Origin[id];
+				return new Rectangle(6 + (int)position.X, 10 + (int)position.Y, 18, 22 + feetMargin);
+			}
+		}
 
 		private int id;
 		private float speed;
-		
+		private TileMap tilemap;
 
 		public PlayerController(int id, float speed, Game game)
 		{
 			this.id = id;
 			data = game.Services.GetService<RenderSystem>().Data;
+			tilemap = game.Services.GetService<TilemapManager>().TileMap;
+
 			this.speed = speed;
 		}
 
@@ -48,10 +61,20 @@ namespace Sunnyland
 			if (direction == new Vector2(0, 0))
 				anim.Play("playerIdle");
 
-			data.Position[id] += (float)gameTime.ElapsedGameTime.TotalSeconds * speed * direction;
+			var dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+			data.Position[id] += dt * speed * direction;
+			//data.Position[id] += new Vector2(0, gravity * dt);
+
+			Debug.WriteLine($"{TileFromPosition(new Vector2(BoundingBox.Left, BoundingBox.Top))}");
+
 
 		}
 
- 
+		
+		private Point TileFromPosition(Vector2 position)
+		{
+			return new Point((int)position.X / tilemap.TileWidth, (int)position.Y / tilemap.TileHeight);
+		}
 	}
 }
