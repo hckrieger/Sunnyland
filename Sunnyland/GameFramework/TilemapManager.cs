@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -55,6 +56,34 @@ namespace Sunnyland.GameFramework
 			}
 
 			return null;
+		}
+
+	
+
+		public bool TileCoordinateHasLayer(Point coordinate, string layerName)
+		{
+			foreach (var layer in TileMap.Layers)
+			{
+				if (layer.Name != layerName)
+					continue;
+
+				for (int i = 0; i < layer.Data.Count; i++)
+				{
+					if (layer.Data[i] == 0)
+						continue;
+
+					var tileCoordinate = Utils.IntToPoint(i, TileMap.Width);
+
+
+
+					if (coordinate == tileCoordinate)
+						return true;
+
+
+				}
+			}
+
+			return false;
 		}
 
 		private Rectangle GetSourceRectangle(int gid)
@@ -113,8 +142,6 @@ namespace Sunnyland.GameFramework
 		public int TileWidth { get; set; }
 		public int TileHeight { get; set; }
 
-		public int TileRows => Height / TileHeight;
-		public int TileColumns => Width / TileWidth;
 		public List<TileLayer> Layers { get; set; } = [];
 		public List<TileSet> TileSets { get; set; } = [];
 	}

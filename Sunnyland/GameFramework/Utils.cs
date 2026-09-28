@@ -35,6 +35,42 @@ namespace Sunnyland.GameFramework
 			);
 		}
 
+		public static Vector2 GetIntersectionDepth(Rectangle a, Rectangle b)
+		{
+			float halfWidthA = a.Width / 2f;
+			float halfHeightA = a.Height / 2f;
+			float halfWidthB = b.Width / 2f;
+			float halfHeightB = b.Height / 2f;
+
+			float centerAX = a.Left + halfWidthA;
+			float centerAY = a.Top + halfHeightA;
+			float centerBX = b.Left + halfWidthB;
+			float centerBY = b.Top + halfHeightB;
+
+			float distanceX = centerAX - centerBX;
+			float distanceY = centerAY - centerBY;
+
+			float minDistanceX = halfWidthA + halfWidthB;
+			float minDistanceY = halfHeightA + halfHeightB;
+
+			// No intersection
+			if (Math.Abs(distanceX) >= minDistanceX ||
+				Math.Abs(distanceY) >= minDistanceY)
+			{
+				return Vector2.Zero;
+			}
+
+			float depthX = distanceX > 0
+				? minDistanceX - distanceX
+				: -minDistanceX - distanceX;
+
+			float depthY = distanceY > 0
+				? minDistanceY - distanceY
+				: -minDistanceY - distanceY;
+
+			return new Vector2(depthX, depthY);
+		}
+
 		public static T GetValue<T>(this List<TileProperty> propList, string name)
 		{
 			var prop = propList.FirstOrDefault(m => m.Name == name);

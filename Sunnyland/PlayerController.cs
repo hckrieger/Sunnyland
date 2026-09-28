@@ -31,13 +31,14 @@ namespace Sunnyland
 		private int id;
 		private float speed;
 		private TileMap tilemap;
+		private TilemapManager tilemapManager;
 
 		public PlayerController(int id, float speed, Game game)
 		{
 			this.id = id;
 			data = game.Services.GetService<RenderSystem>().Data;
-			tilemap = game.Services.GetService<TilemapManager>().TileMap;
-
+			tilemapManager = game.Services.GetService<TilemapManager>();
+			tilemap = tilemapManager.TileMap;
 			this.speed = speed;
 		}
 
@@ -64,17 +65,49 @@ namespace Sunnyland
 			var dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
 			data.Position[id] += dt * speed * direction;
-			//data.Position[id] += new Vector2(0, gravity * dt);
+			data.Position[id] += new Vector2(0, gravity * dt);
 
-			Debug.WriteLine($"{TileFromPosition(new Vector2(BoundingBox.Left, BoundingBox.Top))}");
+			int leftTile = (int)MathF.Floor((float)BoundingBox.Left / (float)tilemap.TileWidth);
+			int rightTile = (int)MathF.Floor((float)BoundingBox.Right / (float)tilemap.TileWidth);
+			int topTile = (int)MathF.Floor((float)BoundingBox.Top / (float)tilemap.TileHeight);
+			int bottomTile = (int)MathF.Floor((float)BoundingBox.Bottom / (float)tilemap.TileHeight);
 
+		//	Debug.WriteLine($"Left: {leftTile} - Right: {rightTile}\nTop: {topTile} - Bottom {bottomTile}\n");
+
+			for (int y = topTile; y < bottomTile + 1; y++)
+			{
+				for (int x = leftTile; x < rightTile + 1; x++)
+				{
+					bool groundCollision = tilemapManager.TileCoordinateHasLayer(new Point(x, y), "Ground");
+
+					if (groundCollision == false)
+						continue;
+
+					
+
+					Rectangle tileBounds = new Rectangle(x * tilemap.TileWidth, y * tilemap.TileHeight, tilemap.TileWidth, tilemap.TileHeight);
+
+					if (!BoundingBox.Contains(tileBounds))
+						continue;
+
+					Vector2 intersectionDepth = Utils.GetIntersectionDepth(BoundingBox, tileBounds);
+
+
+					if (intersectionDepth.X > intersectionDepth.Y)
+					{
+						data.Position[id] += new Vector2(0, intersectionDepth.Y);
+					} else
+					{
+
+					}
+					
+					
+				}
+			}
 
 		}
 
-		
-		private Point TileFromPosition(Vector2 position)
-		{
-			return new Point((int)position.X / tilemap.TileWidth, (int)position.Y / tilemap.TileHeight);
-		}
+
+
 	}
 }
