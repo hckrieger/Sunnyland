@@ -72,6 +72,7 @@ namespace Sunnyland
 			int topTile = (int)MathF.Floor((float)BoundingBox.Top / (float)tilemap.TileHeight);
 			int bottomTile = (int)MathF.Floor((float)BoundingBox.Bottom / (float)tilemap.TileHeight);
 
+
 		//	Debug.WriteLine($"Left: {leftTile} - Right: {rightTile}\nTop: {topTile} - Bottom {bottomTile}\n");
 
 			for (int y = topTile; y < bottomTile + 1; y++)
