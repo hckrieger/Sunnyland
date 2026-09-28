@@ -82,6 +82,11 @@ namespace Sunnyland.GameFramework
 
 		}
 
+		public Vector2 ScreenToViewport(Vector2 position)
+		{
+			return Vector2.Zero;
+		}
+
 
 		public DisplayManager(GraphicsDeviceManager graphicsDevice)
 		{
