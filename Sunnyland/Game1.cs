@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Sunnyland.GameFramework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using static Sunnyland.GameFramework.InputManager;
 
@@ -69,7 +70,12 @@ namespace Sunnyland
 		protected override void Initialize()
 		{
 			// TODO: Add your initialization logic here
-			
+			displayManager = new DisplayManager(_graphics)
+			{
+				IsFullScreen = false
+			};
+
+			SetWindowSize(384, 240, 3);
 
 			tilemapManager = new TilemapManager("Data/tilemaps/level.json", Content);
 			textureCache = new DataCache<Texture2D>(Content.Load<Texture2D>);
@@ -160,12 +166,7 @@ namespace Sunnyland
 
 
 
-			displayManager = new DisplayManager(_graphics)
-			{
-				IsFullScreen = false
-			};
-				
-			SetWindowSize(384, 240, 3);
+
 
 			base.Initialize();
 		}

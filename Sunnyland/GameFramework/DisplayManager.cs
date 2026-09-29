@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -80,6 +81,16 @@ namespace Sunnyland.GameFramework
 
 			Viewport = new Rectangle(x, y, width, height);
 
+		}
+
+		public Vector2 ScreenToViewport(Vector2 position)
+		{
+			float scale = (float)Viewport.Width / InternalResolution.X;
+
+			float x = (position.X - Viewport.X) / scale;
+			float y = (position.Y - Viewport.Y) / scale;
+
+			return new Vector2(MathF.Round(x), MathF.Round(y));
 		}
 
 

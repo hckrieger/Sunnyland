@@ -14,9 +14,11 @@ namespace Sunnyland
 	public class PlayerController
 	{
 		private RenderableData data;
-		private int feetMargin = 3;
+		private int feetMargin = 2;
 
-		private float gravity = 75;
+		private float gravity = 100;
+
+
 		public Rectangle BoundingBox
 		{
 			get
@@ -45,6 +47,7 @@ namespace Sunnyland
 		public void Update(GameTime gameTime, InputManager input, AnimationSystem anim)
 		{
 			//playerData.Position[Id] += new Vector2(1, 0) * (float)gameTime.ElapsedGameTime.TotalSeconds * 25f;
+			
 			Vector2 direction = Vector2.Zero;
 
 			if (input.Binding[InputAction.MoveLeft].Invoke())
@@ -73,6 +76,7 @@ namespace Sunnyland
 			int bottomTile = (int)MathF.Floor((float)BoundingBox.Bottom / (float)tilemap.TileHeight);
 
 
+
 		//	Debug.WriteLine($"Left: {leftTile} - Right: {rightTile}\nTop: {topTile} - Bottom {bottomTile}\n");
 
 			for (int y = topTile; y < bottomTile + 1; y++)
@@ -88,15 +92,17 @@ namespace Sunnyland
 
 					Rectangle tileBounds = new Rectangle(x * tilemap.TileWidth, y * tilemap.TileHeight, tilemap.TileWidth, tilemap.TileHeight);
 
-					if (!BoundingBox.Contains(tileBounds))
+					if (!BoundingBox.Intersects(tileBounds))
 						continue;
 
 					Vector2 intersectionDepth = Utils.GetIntersectionDepth(BoundingBox, tileBounds);
 
 
-					if (intersectionDepth.X > intersectionDepth.Y)
+
+
+					if (Math.Abs(intersectionDepth.X) > Math.Abs(intersectionDepth.Y))
 					{
-						data.Position[id] += new Vector2(0, intersectionDepth.Y);
+						data.Position[id] += new Vector2(0, intersectionDepth.Y + feetMargin);
 					} else
 					{
 
