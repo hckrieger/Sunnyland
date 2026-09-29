@@ -128,10 +128,10 @@ namespace Sunnyland.GameFramework
 
 
 
-	//	public float MouseX => MousePosition.X;
-	//	public float MouseY => MousePosition.Y;
+		public float MouseX => MousePosition.X;
+		public float MouseY => MousePosition.Y;
 
-	//	public Vector2 MousePosition => displayManager.ScreenToViewport(new Vector2(currentMouseState.X, currentMouseState.Y));
+		public Vector2 MousePosition => displayManager.ScreenToViewport(new Vector2(currentMouseState.X, currentMouseState.Y));
 
 		public void SetMousePosition(int x, int y)
 		{
@@ -153,15 +153,15 @@ namespace Sunnyland.GameFramework
 			return currentMouseState.LeftButton == ButtonState.Released && previousMouseState.LeftButton == ButtonState.Pressed;
 		}
 
-		//public bool IsMouseOver(Rectangle rectangle)
-		//{
-		//	return rectangle.Contains(MousePosition);
-		//}
+		public bool IsMouseOver(Rectangle rectangle)
+		{
+			return rectangle.Contains(MousePosition);
+		}
 
-		//public bool IsMousePressedOver(Rectangle rectangle)
-		//{
-		//	return rectangle.Contains(MousePosition) & IsMouseButtonPressed();
-		//}
+		public bool IsMousePressedOver(Rectangle rectangle)
+		{
+			return rectangle.Contains(MousePosition) & IsMouseButtonPressed();
+		}
 
 		public bool IsButtonDown(Buttons button)
 		{
