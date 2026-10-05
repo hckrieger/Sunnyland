@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using static Sunnyland.GameFramework.InputManager;
 
 namespace Sunnyland
@@ -18,15 +20,37 @@ namespace Sunnyland
 
 		private float gravity = 100;
 
+		private Vector2 velocity, startPosition;
 
-		public Rectangle BoundingBox
+		private bool isGrounded;
+
+		private bool IsMoving => velocity != Vector2.Zero;
+
+		private bool IsFalling => velocity.Y > 0 && !isGrounded;
+
+		private void SetOriginToBottomCenter()
+		{
+			data.Origin[id] = new Vector2(data.SourceRectangle[id].Width / 2, data.SourceRectangle[id].Height);
+		}
+
+
+		public Rectangle BoundingBoxForCollision
 		{
 			get
 			{
-				Rectangle localRectangle = new Rectangle(6, 10, 18, 22);
+				//Rectangle localRectangle = new Rectangle(6, 10, 18, 22);
 
+				//Vector2 position = data.Position[id] - data.Origin[id];
+				//return new Rectangle(6 + (int)position.X, 10 + (int)position.Y, 18, 22 + feetMargin);
 				Vector2 position = data.Position[id] - data.Origin[id];
-				return new Rectangle(6 + (int)position.X, 10 + (int)position.Y, 18, 22 + feetMargin);
+
+				Rectangle bbox = data.SourceRectangle[id];
+				bbox.X += 6 + (int)position.X;
+				bbox.Y += 10 + (int)position.Y;
+				bbox.Width -= 15;
+				bbox.Height += 22;
+				
+				return bbox;
 			}
 		}
 
@@ -47,7 +71,7 @@ namespace Sunnyland
 		public void Update(GameTime gameTime, InputManager input, AnimationSystem anim)
 		{
 			//playerData.Position[Id] += new Vector2(1, 0) * (float)gameTime.ElapsedGameTime.TotalSeconds * 25f;
-			
+			Vector2 previousPosition = data.Position[id];
 			Vector2 direction = Vector2.Zero;
 
 			if (input.Binding[InputAction.MoveLeft].Invoke())
@@ -70,14 +94,24 @@ namespace Sunnyland
 			data.Position[id] += dt * speed * direction;
 			data.Position[id] += new Vector2(0, gravity * dt);
 
-			int leftTile = (int)MathF.Floor((float)BoundingBox.Left / (float)tilemap.TileWidth);
-			int rightTile = (int)MathF.Floor((float)BoundingBox.Right / (float)tilemap.TileWidth);
-			int topTile = (int)MathF.Floor((float)BoundingBox.Top / (float)tilemap.TileHeight);
-			int bottomTile = (int)MathF.Floor((float)BoundingBox.Bottom / (float)tilemap.TileHeight);
+
+
+		}
+
+		private void HandleTileCollision(Vector2 previousPosition)
+		{
+			isGrounded = false;
+
+			Rectangle bbox = BoundingBoxForCollision;
+
+			int leftTile = (int)MathF.Floor((float)BoundingBoxForCollision.Left / (float)tilemap.TileWidth);
+			int rightTile = (int)MathF.Floor((float)BoundingBoxForCollision.Right / (float)tilemap.TileWidth);
+			int topTile = (int)MathF.Floor((float)BoundingBoxForCollision.Top / (float)tilemap.TileHeight);
+			int bottomTile = (int)MathF.Floor((float)BoundingBoxForCollision.Bottom / (float)tilemap.TileHeight);
 
 
 
-		//	Debug.WriteLine($"Left: {leftTile} - Right: {rightTile}\nTop: {topTile} - Bottom {bottomTile}\n");
+			//	Debug.WriteLine($"Left: {leftTile} - Right: {rightTile}\nTop: {topTile} - Bottom {bottomTile}\n");
 
 			for (int y = topTile; y < bottomTile + 1; y++)
 			{
@@ -88,32 +122,43 @@ namespace Sunnyland
 					if (groundCollision == false)
 						continue;
 
-					
+
 
 					Rectangle tileBounds = new Rectangle(x * tilemap.TileWidth, y * tilemap.TileHeight, tilemap.TileWidth, tilemap.TileHeight);
 
-					if (!BoundingBox.Intersects(tileBounds))
+					if (!BoundingBoxForCollision.Intersects(tileBounds))
 						continue;
 
-					Vector2 intersectionDepth = Utils.GetIntersectionDepth(BoundingBox, tileBounds);
+					Vector2 intersectionDepth = Utils.GetIntersectionDepth(BoundingBoxForCollision, tileBounds);
 
 
 
 
-					if (Math.Abs(intersectionDepth.X) > Math.Abs(intersectionDepth.Y))
+					if (intersectionDepth.Y < intersectionDepth.X)
 					{
-						data.Position[id] += new Vector2(0, intersectionDepth.Y + feetMargin);
+						if ((velocity.X >= 0 && bbox.Center.X < tileBounds.Left) ||
+							(velocity.X <= 0 && bbox.Center.X > tileBounds.Right))
+						{
+							data.Position[id].X = previousPosition.X;
+						}
 					} else
 					{
-
+						if (velocity.Y >= 0 && bbox.Center.Y < tileBounds.Top && intersectionDepth.X > 6)
+						{
+							isGrounded = true;
+							velocity.Y = 0;
+							data.Position[id].Y = tileBounds.Top;
+						} else if (velocity.Y <= 0 && bbox.Center.Y > tileBounds.Bottom && intersectionDepth.Y > 2)
+						{
+							data.Position[id].Y = previousPosition.Y;
+							velocity.Y = 0;
+						}
 					}
-					
-					
+
+
 				}
 			}
-
 		}
-
 
 
 	}
