@@ -42,57 +42,76 @@ namespace Sunnyland
 
 				//Vector2 position = data.Position[id] - data.Origin[id];
 				//return new Rectangle(6 + (int)position.X, 10 + (int)position.Y, 18, 22 + feetMargin);
-				Vector2 position = data.Position[id] - data.Origin[id];
+				Vector2 position = data.Position[id];
+				Vector2 origin = data.Origin[id];
+				position -= origin;
 
 				Rectangle bbox = data.SourceRectangle[id];
-				bbox.X += 6 + (int)position.X;
-				bbox.Y += 10 + (int)position.Y;
-				bbox.Width -= 15;
-				bbox.Height += 22;
+				bbox.X += 11 + (int)position.X;
+				bbox.Y += 12 + (int)position.Y;
+				bbox.Width -= 23;
+				bbox.Height -= 12;
 				
 				return bbox;
 			}
 		}
 
 		private int id;
-		private float speed;
+		private float walkingSpeed;
+		private float jumpSpeed;
 		private TileMap tilemap;
 		private TilemapManager tilemapManager;
 
-		public PlayerController(int id, float speed, Game game)
+		public PlayerController(int id, float speed, float jumpSpeed, Game game)
 		{
 			this.id = id;
 			data = game.Services.GetService<RenderSystem>().Data;
 			tilemapManager = game.Services.GetService<TilemapManager>();
 			tilemap = tilemapManager.TileMap;
-			this.speed = speed;
+			walkingSpeed = speed;
+			this.jumpSpeed = jumpSpeed;
 		}
 
 		public void Update(GameTime gameTime, InputManager input, AnimationSystem anim)
 		{
 			//playerData.Position[Id] += new Vector2(1, 0) * (float)gameTime.ElapsedGameTime.TotalSeconds * 25f;
 			Vector2 previousPosition = data.Position[id];
-			Vector2 direction = Vector2.Zero;
+			float desiredHorizontalSpeed;
+
 
 			if (input.Binding[InputAction.MoveLeft].Invoke())
 			{
-				direction = new Vector2(-1, 0);
+				
 				anim.Play("playerRun");
 				data.SpriteEffects[id] = SpriteEffects.FlipHorizontally;
+				desiredHorizontalSpeed = -walkingSpeed;
 			} else if (input.Binding[InputAction.MoveRight].Invoke())
 			{
-				direction = new Vector2(1, 0);
 				anim.Play("playerRun");
 				data.SpriteEffects[id] = SpriteEffects.None;
+				desiredHorizontalSpeed = walkingSpeed;
+			}
+			else
+			{
+				desiredHorizontalSpeed = 0;
+				if (isGrounded)
+					anim.Play("playerIdle");
 			}
 
-			if (direction == new Vector2(0, 0))
-				anim.Play("playerIdle");
+			velocity.X += (desiredHorizontalSpeed - velocity.X);
 
 			var dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-			data.Position[id] += dt * speed * direction;
-			data.Position[id] += new Vector2(0, gravity * dt);
+			data.Position[id] += dt * velocity;
+			velocity.Y += gravity * dt;
+
+			HandleTileCollision(previousPosition);
+
+			int x = ((int)input.MousePosition.X / tilemap.TileWidth);
+			int y = ((int)input.MousePosition.Y / tilemap.TileHeight);
+
+			Debug.WriteLine($"{BoundingBoxForCollision.Contains(input.MousePosition)}");
+
 
 
 
@@ -131,10 +150,10 @@ namespace Sunnyland
 
 					Vector2 intersectionDepth = Utils.GetIntersectionDepth(BoundingBoxForCollision, tileBounds);
 
+				
 
 
-
-					if (intersectionDepth.Y < intersectionDepth.X)
+					if (intersectionDepth.X < intersectionDepth.Y)
 					{
 						if ((velocity.X >= 0 && bbox.Center.X < tileBounds.Left) ||
 							(velocity.X <= 0 && bbox.Center.X > tileBounds.Right))
@@ -143,12 +162,12 @@ namespace Sunnyland
 						}
 					} else
 					{
-						if (velocity.Y >= 0 && bbox.Center.Y < tileBounds.Top && intersectionDepth.X > 6)
+						if (velocity.Y >= 0 && bbox.Center.Y < tileBounds.Top)
 						{
 							isGrounded = true;
 							velocity.Y = 0;
 							data.Position[id].Y = tileBounds.Top;
-						} else if (velocity.Y <= 0 && bbox.Center.Y > tileBounds.Bottom && intersectionDepth.Y > 2)
+						} else if (velocity.Y <= 0 && bbox.Center.Y > tileBounds.Bottom)
 						{
 							data.Position[id].Y = previousPosition.Y;
 							velocity.Y = 0;

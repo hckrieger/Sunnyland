@@ -341,9 +341,14 @@
                          "value":33
                         }, 
                         {
+                         "name":"jumpSpeed",
+                         "type":"float",
+                         "value":900
+                        }, 
+                        {
                          "name":"speed",
-                         "type":"int",
-                         "value":56
+                         "type":"float",
+                         "value":400
                         }, 
                         {
                          "name":"texture path",

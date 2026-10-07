@@ -135,8 +135,9 @@ namespace Sunnyland
 					switch (obj.Name)
 					{
 						case "Player":
-							float speed = Utils.GetValue<int>(obj.Properties, "speed");
-							playerController = new PlayerController(id, speed, this);
+							float speed = Utils.GetValue<float>(obj.Properties, "speed");
+							float jumpSpeed = Utils.GetValue<float>(obj.Properties, "jump speed");
+							playerController = new PlayerController(id, speed, jumpSpeed, this);
 							Animation idleAnimation = new Animation(obj.Name, cellSize, .21f, [0, 1, 2, 3], id, true);
 							animationSystem.InitializeAnimation("playerIdle", idleAnimation);
 							Animation runAnimation = new Animation(obj.Name, cellSize, .1f, [6, 7, 8, 9, 10, 11], id, true);
