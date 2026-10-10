@@ -35,40 +35,21 @@ namespace Sunnyland.GameFramework
 			);
 		}
 
-		public static Vector2 GetIntersectionDepth(Rectangle a, Rectangle b)
+		public static bool ShapesIntersect(Rectangle rectangle1, Rectangle rectangle2)
 		{
-			float halfWidthA = a.Width / 2f;
-			float halfHeightA = a.Height / 2f;
-			float halfWidthB = b.Width / 2f;
-			float halfHeightB = b.Height / 2f;
+			return rectangle1.Intersects(rectangle2);
+		}
 
-			float centerAX = a.Left + halfWidthA;
-			float centerAY = a.Top + halfHeightA;
-			float centerBX = b.Left + halfWidthB;
-			float centerBY = b.Top + halfHeightB;
+		public static Rectangle CalculateIntersection(Rectangle rect1, Rectangle rect2)
+		{
+			if (!ShapesIntersect(rect1, rect2))
+				return new Rectangle(0, 0, 0, 0);
 
-			float distanceX = centerAX - centerBX;
-			float distanceY = centerAY - centerBY;
-
-			float minDistanceX = halfWidthA + halfWidthB;
-			float minDistanceY = halfHeightA + halfHeightB;
-
-			// No intersection
-			if (Math.Abs(distanceX) >= minDistanceX ||
-				Math.Abs(distanceY) >= minDistanceY)
-			{
-				return Vector2.Zero;
-			}
-
-			float depthX = distanceX > 0
-				? minDistanceX - distanceX
-				: -minDistanceX - distanceX;
-
-			float depthY = distanceY > 0
-				? minDistanceY - distanceY
-				: -minDistanceY - distanceY;
-
-			return new Vector2(depthX, depthY);
+			int xmin = Math.Max(rect1.Left, rect2.Left);
+			int xmax = Math.Min(rect1.Right, rect2.Right);
+			int ymin = Math.Max(rect1.Top, rect2.Top);
+			int ymax = Math.Min(rect1.Bottom, rect2.Bottom);
+			return new Rectangle(xmin, ymin, xmax - xmin, ymax - ymin);
 		}
 
 		public static T GetValue<T>(this List<TileProperty> propList, string name)
