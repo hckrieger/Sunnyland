@@ -17,9 +17,12 @@ namespace Sunnyland
 	{
 		private RenderableData data;
 
-		private float gravity = 100;
+		private float gravity = 666f;
+		private float maxFallSpeed = 275f;
 
 		private Vector2 velocity, startPosition;
+		private float walkingSpeed = 65f;
+		private float jumpSpeed = 200f;
 
 		private bool isGrounded;
 
@@ -58,22 +61,20 @@ namespace Sunnyland
 		}
 
 		private int id;
-		private float walkingSpeed;
-		private float jumpSpeed;
 		private TileMap tilemap;
 		private TilemapManager tilemapManager;
 
-		public PlayerController(int id, float speed, float jumpSpeed, Game game)
+		public PlayerController(int id, Game game)
 		{
 			this.id = id;
 			data = game.Services.GetService<RenderSystem>().Data;
 			tilemapManager = game.Services.GetService<TilemapManager>();
 			tilemap = tilemapManager.TileMap;
-			walkingSpeed = speed;
-			this.jumpSpeed = jumpSpeed;
 			SetOriginToBottomCenter();
 			
 		}
+
+	
 
 		public void Update(GameTime gameTime, InputManager input, AnimationSystem anim)
 		{
@@ -101,14 +102,24 @@ namespace Sunnyland
 					anim.Play("playerIdle");
 			}
 
+			if (input.Binding[InputAction.Jump].Invoke() && isGrounded)
+			{
+				velocity.Y = -jumpSpeed;
+				isGrounded = false;
+			}
+
+			
+
 			SetOriginToBottomCenter();
 
 			velocity.X += (desiredHorizontalSpeed - velocity.X);
 
 			var dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+			ApplyGravity(dt);
+
+
 			data.Position[id] += dt * velocity;
-			velocity.Y += gravity * dt;
 
 			HandleTileCollision(previousPosition);
 
@@ -116,10 +127,13 @@ namespace Sunnyland
 			int y = ((int)input.MousePosition.Y / tilemap.TileHeight);
 
 			Debug.WriteLine($"{BoundingBoxForCollision.Contains(input.MousePosition)}");
+		}
 
-
-
-
+		private void ApplyGravity(float dt)
+		{
+			velocity.Y += gravity * dt;
+			if (velocity.Y > maxFallSpeed)
+				velocity.Y = maxFallSpeed;
 		}
 
 		private void HandleTileCollision(Vector2 previousPosition)
@@ -166,7 +180,7 @@ namespace Sunnyland
 						}
 					} else
 					{
-						if (velocity.Y >= 0 && bbox.Center.Y < tileBounds.Top)
+						if (velocity.Y >= 0 && bbox.Center.Y < tileBounds.Top && intersection.Width > 2)
 						{
 							isGrounded = true;
 							velocity.Y = 0;
