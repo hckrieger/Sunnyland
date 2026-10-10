@@ -72,7 +72,7 @@ namespace Sunnyland
 			// TODO: Add your initialization logic here
 			displayManager = new DisplayManager(_graphics)
 			{
-				IsFullScreen = false
+				IsFullScreen = true
 			};
 
 			SetWindowSize(384, 240, 3);
@@ -138,7 +138,7 @@ namespace Sunnyland
 							playerController = new PlayerController(id, this);
 							Animation idleAnimation = new Animation(obj.Name, cellSize, .21f, [0, 1, 2, 3], id, true);
 							animationSystem.InitializeAnimation("playerIdle", idleAnimation);
-							Animation runAnimation = new Animation(obj.Name, cellSize, .085f, [6, 7, 8, 9, 10, 11], id, true);
+							Animation runAnimation = new Animation(obj.Name, cellSize, .08f, [6, 7, 8, 9, 10, 11], id, true);
 							animationSystem.InitializeAnimation("playerRun", runAnimation);
 							animationSystem.Play("playerIdle");
 							Animation jumpAnimation = new Animation(obj.Name, cellSize, 1f, [30], id, true);

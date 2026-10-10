@@ -14,13 +14,13 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 29, 31, 0, 0, 0, 0, 0, 0, 0, 27, 29, 31, 0, 0,
-            27, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 31,
-            77, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 81,
-            127, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 131],
+            0, 0, 0, 0, 177, 0, 0, 0, 179, 0, 0, 0, 0, 187, 185, 0, 0, 0, 177, 0, 0, 0, 261, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":15,
-         "id":1,
-         "name":"Ground",
+         "id":2,
+         "name":"Nature",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
@@ -38,15 +38,15 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 177, 0, 0, 0, 179, 0, 0, 0, 0, 187, 185, 0, 0, 0, 177, 0, 0, 0, 261, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 29, 27, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 29, 29, 27, 181, 181, 181, 27, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 29, 31, 181, 181, 181, 181, 181, 79, 181, 181, 29, 31, 0, 0,
+            27, 29, 29, 29, 29, 29, 29, 29, 29, 181, 181, 181, 181, 79, 79, 79, 79, 79, 79, 181, 181, 181, 29, 31,
+            77, 79, 79, 79, 79, 79, 79, 79, 181, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 81,
+            127, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 129, 131],
          "height":15,
-         "id":2,
-         "name":"Nature",
+         "id":1,
+         "name":"Ground",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
@@ -95,118 +95,6 @@
                  "visible":true,
                  "width":0,
                  "x":128,
-                 "y":176
-                }, 
-                {
-                 "height":0,
-                 "id":13,
-                 "name":"Gem",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"cell height",
-                         "type":"int",
-                         "value":13
-                        }, 
-                        {
-                         "name":"cell width",
-                         "type":"int",
-                         "value":15
-                        }, 
-                        {
-                         "name":"texture path",
-                         "type":"string",
-                         "value":"items\/gem"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":176,
-                 "y":176
-                }, 
-                {
-                 "height":0,
-                 "id":14,
-                 "name":"Gem",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"cell height",
-                         "type":"int",
-                         "value":13
-                        }, 
-                        {
-                         "name":"cell width",
-                         "type":"int",
-                         "value":15
-                        }, 
-                        {
-                         "name":"texture path",
-                         "type":"string",
-                         "value":"items\/gem"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":208,
-                 "y":176
-                }, 
-                {
-                 "height":0,
-                 "id":15,
-                 "name":"Gem",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"cell height",
-                         "type":"int",
-                         "value":13
-                        }, 
-                        {
-                         "name":"cell width",
-                         "type":"int",
-                         "value":15
-                        }, 
-                        {
-                         "name":"texture path",
-                         "type":"string",
-                         "value":"items\/gem"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":240,
-                 "y":176
-                }, 
-                {
-                 "height":0,
-                 "id":16,
-                 "name":"Gem",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"cell height",
-                         "type":"int",
-                         "value":13
-                        }, 
-                        {
-                         "name":"cell width",
-                         "type":"int",
-                         "value":15
-                        }, 
-                        {
-                         "name":"texture path",
-                         "type":"string",
-                         "value":"items\/gem"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":272,
                  "y":176
                 }, 
                 {
@@ -312,6 +200,118 @@
                  "width":0,
                  "x":368,
                  "y":144
+                }, 
+                {
+                 "height":0,
+                 "id":32,
+                 "name":"Gem",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"cell height",
+                         "type":"int",
+                         "value":13
+                        }, 
+                        {
+                         "name":"cell width",
+                         "type":"int",
+                         "value":15
+                        }, 
+                        {
+                         "name":"texture path",
+                         "type":"string",
+                         "value":"items\/gem"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":208,
+                 "y":144
+                }, 
+                {
+                 "height":0,
+                 "id":33,
+                 "name":"Gem",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"cell height",
+                         "type":"int",
+                         "value":13
+                        }, 
+                        {
+                         "name":"cell width",
+                         "type":"int",
+                         "value":15
+                        }, 
+                        {
+                         "name":"texture path",
+                         "type":"string",
+                         "value":"items\/gem"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":240,
+                 "y":144
+                }, 
+                {
+                 "height":0,
+                 "id":34,
+                 "name":"Gem",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"cell height",
+                         "type":"int",
+                         "value":13
+                        }, 
+                        {
+                         "name":"cell width",
+                         "type":"int",
+                         "value":15
+                        }, 
+                        {
+                         "name":"texture path",
+                         "type":"string",
+                         "value":"items\/gem"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":272,
+                 "y":128
+                }, 
+                {
+                 "height":0,
+                 "id":35,
+                 "name":"Gem",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"cell height",
+                         "type":"int",
+                         "value":13
+                        }, 
+                        {
+                         "name":"cell width",
+                         "type":"int",
+                         "value":15
+                        }, 
+                        {
+                         "name":"texture path",
+                         "type":"string",
+                         "value":"items\/gem"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":304,
+                 "y":128
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -359,7 +359,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":32,
+ "nextobjectid":36,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

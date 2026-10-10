@@ -29,6 +29,7 @@ namespace Sunnyland
 		private bool IsMoving => velocity != Vector2.Zero;
 
 		private bool IsFalling => velocity.Y > 0 && !isGrounded;
+		private bool IsJumping => velocity.Y < 0 && !isGrounded;
 
 		private void SetOriginToBottomCenter()
 		{
@@ -108,7 +109,12 @@ namespace Sunnyland
 				isGrounded = false;
 			}
 
-			
+			if (IsFalling)
+				anim.Play("playerFall");
+
+			if (IsJumping)
+				anim.Play("playerJump");
+
 
 			SetOriginToBottomCenter();
 
