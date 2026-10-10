@@ -140,7 +140,7 @@ namespace Sunnyland
 							playerController = new PlayerController(id, speed, jumpSpeed, this);
 							Animation idleAnimation = new Animation(obj.Name, cellSize, .21f, [0, 1, 2, 3], id, true);
 							animationSystem.InitializeAnimation("playerIdle", idleAnimation);
-							Animation runAnimation = new Animation(obj.Name, cellSize, .1f, [6, 7, 8, 9, 10, 11], id, true);
+							Animation runAnimation = new Animation(obj.Name, cellSize, .105f, [6, 7, 8, 9, 10, 11], id, true);
 							animationSystem.InitializeAnimation("playerRun", runAnimation);
 							animationSystem.Play("playerIdle");
 							break;

@@ -16,7 +16,6 @@ namespace Sunnyland
 	public class PlayerController
 	{
 		private RenderableData data;
-		private int feetMargin = 2;
 
 		private float gravity = 100;
 
@@ -38,7 +37,7 @@ namespace Sunnyland
 		{
 			get
 			{
-				//Rectangle localRectangle = new Rectangle(6, 10, 18, 22);
+				Rectangle localRectangle = new Rectangle(11, 12, 12, 20);
 
 				//Vector2 position = data.Position[id] - data.Origin[id];
 				//return new Rectangle(6 + (int)position.X, 10 + (int)position.Y, 18, 22 + feetMargin);
@@ -46,11 +45,13 @@ namespace Sunnyland
 				Vector2 origin = data.Origin[id];
 				position -= origin;
 
-				Rectangle bbox = data.SourceRectangle[id];
-				bbox.X += 11 + (int)position.X;
-				bbox.Y += 12 + (int)position.Y;
-				bbox.Width -= 23;
-				bbox.Height -= 12;
+				Rectangle bbox = new Rectangle(
+					(int)position.X + localRectangle.X,
+					(int)position.Y + localRectangle.Y,
+					localRectangle.Width,
+					localRectangle.Height + 1);
+
+				
 				
 				return bbox;
 			}
@@ -70,6 +71,8 @@ namespace Sunnyland
 			tilemap = tilemapManager.TileMap;
 			walkingSpeed = speed;
 			this.jumpSpeed = jumpSpeed;
+			SetOriginToBottomCenter();
+			
 		}
 
 		public void Update(GameTime gameTime, InputManager input, AnimationSystem anim)
@@ -98,6 +101,8 @@ namespace Sunnyland
 					anim.Play("playerIdle");
 			}
 
+			SetOriginToBottomCenter();
+
 			velocity.X += (desiredHorizontalSpeed - velocity.X);
 
 			var dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -123,18 +128,16 @@ namespace Sunnyland
 
 			Rectangle bbox = BoundingBoxForCollision;
 
-			int leftTile = (int)MathF.Floor((float)BoundingBoxForCollision.Left / (float)tilemap.TileWidth);
-			int rightTile = (int)MathF.Floor((float)BoundingBoxForCollision.Right / (float)tilemap.TileWidth);
-			int topTile = (int)MathF.Floor((float)BoundingBoxForCollision.Top / (float)tilemap.TileHeight);
-			int bottomTile = (int)MathF.Floor((float)BoundingBoxForCollision.Bottom / (float)tilemap.TileHeight);
-
+			Point topLeftTile = tilemapManager.GetTileCoordinates(new Vector2(bbox.Left, bbox.Top)) - new Point(1, 1);
+			Point bottomRightTile = tilemapManager.GetTileCoordinates(new Vector2(bbox.Right, bbox.Bottom)) + new Point(1, 1);
 
 
 			//	Debug.WriteLine($"Left: {leftTile} - Right: {rightTile}\nTop: {topTile} - Bottom {bottomTile}\n");
 
-			for (int y = topTile; y < bottomTile + 1; y++)
+
+			for (int y = topLeftTile.Y; y < bottomRightTile.Y + 1; y++)
 			{
-				for (int x = leftTile; x < rightTile + 1; x++)
+				for (int x = topLeftTile.X; x < bottomRightTile.X + 1; x++)
 				{
 					bool groundCollision = tilemapManager.TileCoordinateHasLayer(new Point(x, y), "Ground");
 
@@ -143,17 +146,18 @@ namespace Sunnyland
 
 
 
-					Rectangle tileBounds = new Rectangle(x * tilemap.TileWidth, y * tilemap.TileHeight, tilemap.TileWidth, tilemap.TileHeight);
+					Rectangle tileBounds =  new Rectangle(x * tilemap.TileWidth, y * tilemap.TileHeight, tilemap.TileWidth, tilemap.TileHeight);
 
 					if (!BoundingBoxForCollision.Intersects(tileBounds))
 						continue;
 
-					Vector2 intersectionDepth = Utils.GetIntersectionDepth(BoundingBoxForCollision, tileBounds);
+					Rectangle intersection = Utils.CalculateIntersection(BoundingBoxForCollision, tileBounds);
 
-				
+					if (intersection.Width == 0 || intersection.Height == 0)
+						continue;
 
 
-					if (intersectionDepth.X < intersectionDepth.Y)
+					if (intersection.Width < intersection.Height)
 					{
 						if ((velocity.X >= 0 && bbox.Center.X < tileBounds.Left) ||
 							(velocity.X <= 0 && bbox.Center.X > tileBounds.Right))

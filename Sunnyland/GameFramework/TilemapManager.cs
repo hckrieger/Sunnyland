@@ -58,7 +58,10 @@ namespace Sunnyland.GameFramework
 			return null;
 		}
 
-	
+		public Point GetTileCoordinates(Vector2 position)
+		{
+			return new Point((int)Math.Floor(position.X / TileMap.TileWidth), (int)Math.Floor(position.Y / TileMap.TileHeight));
+		}
 
 		public bool TileCoordinateHasLayer(Point coordinate, string layerName)
 		{
