@@ -24,8 +24,15 @@ namespace Sunnyland
 		private float walkingSpeed = 65f;
 		private float jumpSpeed = 200f;
 
-		private float jumpYStart;
 		private bool isGrounded;
+
+		private bool isDoubleJumping = false;
+
+		public bool IsDoubleJumping
+		{
+			get { return isDoubleJumping; }
+			set { isDoubleJumping = value; }
+		}
 
 		private bool IsMoving => velocity != Vector2.Zero;
 
@@ -76,7 +83,7 @@ namespace Sunnyland
 			
 		}
 
-	
+
 
 		public void Update(GameTime gameTime, InputManager input, AnimationSystem anim)
 		{
@@ -106,7 +113,6 @@ namespace Sunnyland
 
 			if (input.Binding[InputAction.Jump].Invoke() && isGrounded)
 			{
-				jumpYStart = data.Position[id].Y;
 				velocity.Y = -jumpSpeed;
 				isGrounded = false;
 
@@ -117,14 +123,25 @@ namespace Sunnyland
 			if (input.Binding[InputAction.JumpRelease].Invoke() && velocity.Y < 0)
 			{
 				velocity.Y = -jumpSpeed/2;
-				jumpYStart = 0;
 			}
 
-			if (IsFalling)
-				anim.Play("playerFall");
+			if (input.Binding[InputAction.Jump].Invoke() && !isGrounded && !isDoubleJumping)
+			{
+				velocity.Y = -jumpSpeed;
+				isDoubleJumping = true;
+				anim.Play("playerDoubleJump");
+			}
 
-			if (IsJumping)
-				anim.Play("playerJump");
+			if (!isDoubleJumping)
+			{
+				if (IsFalling)
+					anim.Play("playerFall");
+
+				if (IsJumping)
+					anim.Play("playerJump");
+			}
+
+
 
 
 			SetOriginToBottomCenter();
@@ -139,7 +156,6 @@ namespace Sunnyland
 			data.Position[id] += dt * velocity;
 
 			HandleTileCollision(previousPosition);
-			Debug.WriteLine($"{Math.Abs(data.Position[id].Y - jumpYStart)}");
 		}
 
 		private void ApplyGravity(float dt)

@@ -26,6 +26,11 @@ namespace Sunnyland.GameFramework
 			animations[name] = animation;
 		}
 
+		public Animation GetAnimation(string name)
+		{
+			return animations[name];
+		}
+
 		public void Play(string name)
 		{
 			if (animations.TryGetValue(name, out Animation value))
@@ -48,6 +53,8 @@ namespace Sunnyland.GameFramework
 				throw new KeyNotFoundException($"Key {name} not found");
 			}
 		}
+
+
 
 		public bool HasAnimation(string name)
 		{
@@ -77,7 +84,7 @@ namespace Sunnyland.GameFramework
 					{
 						anim.Index = 0;
 
-
+						anim.EndOfAnimationAction?.Invoke();
 						if (anim.IsLooping == false)
 						{
 							anim.IsPlaying = false;
