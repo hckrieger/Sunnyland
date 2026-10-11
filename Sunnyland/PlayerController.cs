@@ -24,6 +24,7 @@ namespace Sunnyland
 		private float walkingSpeed = 65f;
 		private float jumpSpeed = 200f;
 
+		private float jumpYStart;
 		private bool isGrounded;
 
 		private bool IsMoving => velocity != Vector2.Zero;
@@ -105,8 +106,18 @@ namespace Sunnyland
 
 			if (input.Binding[InputAction.Jump].Invoke() && isGrounded)
 			{
+				jumpYStart = data.Position[id].Y;
 				velocity.Y = -jumpSpeed;
 				isGrounded = false;
+
+
+
+			}
+
+			if (input.Binding[InputAction.JumpRelease].Invoke() && velocity.Y < 0)
+			{
+				velocity.Y = -jumpSpeed/2;
+				jumpYStart = 0;
 			}
 
 			if (IsFalling)
@@ -128,11 +139,7 @@ namespace Sunnyland
 			data.Position[id] += dt * velocity;
 
 			HandleTileCollision(previousPosition);
-
-			int x = ((int)input.MousePosition.X / tilemap.TileWidth);
-			int y = ((int)input.MousePosition.Y / tilemap.TileHeight);
-
-			Debug.WriteLine($"{BoundingBoxForCollision.Contains(input.MousePosition)}");
+			Debug.WriteLine($"{Math.Abs(data.Position[id].Y - jumpYStart)}");
 		}
 
 		private void ApplyGravity(float dt)
@@ -172,7 +179,7 @@ namespace Sunnyland
 						continue;
 
 					Rectangle intersection = Utils.CalculateIntersection(BoundingBoxForCollision, tileBounds);
-
+					
 					if (intersection.Width == 0 || intersection.Height == 0)
 						continue;
 

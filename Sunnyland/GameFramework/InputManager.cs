@@ -28,6 +28,7 @@ namespace Sunnyland.GameFramework
 		public enum InputAction
 		{
 			Jump,
+			JumpRelease,
 			Attack,
 			Dash,
 			Interact,
@@ -66,6 +67,7 @@ namespace Sunnyland.GameFramework
 				{ InputAction.Crouch,    () => IsKeyDown(Keys.S) || IsKeyDown(Keys.Down) || IsButtonDown(Buttons.DPadDown) },
 
 				{ InputAction.Jump,      () => IsKeyPressed(Keys.Space) || IsButtonPressed(Buttons.A) },
+				{ InputAction.JumpRelease,      () => IsKeyReleased(Keys.Space) || IsButtonReleased(Buttons.A) },
 				{ InputAction.Attack,    () => IsKeyPressed(Keys.U) || IsButtonPressed(Buttons.X) },
 				{ InputAction.Dash,      () => IsKeyPressed(Keys.O) || IsButtonPressed(Buttons.B) },
 				{ InputAction.Interact,  () => IsKeyPressed(Keys.E) || IsButtonPressed(Buttons.Y) },
