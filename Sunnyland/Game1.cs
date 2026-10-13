@@ -146,7 +146,7 @@ namespace Sunnyland
 							Animation fallAnimation = new Animation(obj.Name, cellSize, 1f, [31], id, true);
 							animationSystem.InitializeAnimation("playerFall", fallAnimation);
 							Animation doubleJumpAnimation = new Animation(obj.Name, cellSize, 1f, [54, 55, 56, 57], id, false);
-							doubleJumpAnimation.EndOfAnimationAction = () => playerController.IsDoubleJumping = false;
+						//	doubleJumpAnimation.EndOfAnimationAction = () => playerController.IsDoubleJumping = false;
 							animationSystem.InitializeAnimation("playerDoubleJump", doubleJumpAnimation);
 							break;
 						case "Gem":

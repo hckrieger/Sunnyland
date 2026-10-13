@@ -36,14 +36,25 @@ namespace Sunnyland
 
 		private bool IsMoving => velocity != Vector2.Zero;
 
-		private bool IsFalling => velocity.Y > 0 && !isGrounded;
-		private bool IsJumping => velocity.Y < 0 && !isGrounded;
+		private bool hasDoubleJumpedWhileInAir = false;
+
+		private bool IsFalling => velocity.Y > 0;
+		private bool IsJumping => velocity.Y < 0;
 
 		private void SetOriginToBottomCenter()
 		{
 			data.Origin[id] = new Vector2(data.SourceRectangle[id].Width / 2, data.SourceRectangle[id].Height);
 		}
 
+		private enum VerticalState
+		{
+			Grounded,
+			Jumping,
+
+			DoubleJumping
+		}
+
+		private VerticalState verticalState = VerticalState.Grounded;
 
 		public Rectangle BoundingBoxForCollision
 		{
@@ -108,16 +119,25 @@ namespace Sunnyland
 			{
 				desiredHorizontalSpeed = 0;
 				if (isGrounded)
+				{
 					anim.Play("playerIdle");
+					
+				}
+					
 			}
 
-			if (input.Binding[InputAction.Jump].Invoke() && isGrounded)
+			if (input.Binding[InputAction.Jump].Invoke() && !isGrounded && verticalState == VerticalState.Jumping)
+			{
+				velocity.Y = -jumpSpeed;
+				verticalState = VerticalState.DoubleJumping;
+				anim.Play("playerDoubleJump");
+			}
+
+			if (input.Binding[InputAction.Jump].Invoke() && isGrounded && verticalState == VerticalState.Grounded)
 			{
 				velocity.Y = -jumpSpeed;
 				isGrounded = false;
-
-
-
+				verticalState = VerticalState.Jumping;
 			}
 
 			if (input.Binding[InputAction.JumpRelease].Invoke() && velocity.Y < 0)
@@ -125,22 +145,18 @@ namespace Sunnyland
 				velocity.Y = -jumpSpeed/2;
 			}
 
-			if (input.Binding[InputAction.Jump].Invoke() && !isGrounded && !isDoubleJumping)
-			{
-				velocity.Y = -jumpSpeed;
-				isDoubleJumping = true;
-				anim.Play("playerDoubleJump");
-			}
 
-			if (!isDoubleJumping)
-			{
+
+			
 				if (IsFalling)
 					anim.Play("playerFall");
 
 				if (IsJumping)
 					anim.Play("playerJump");
-			}
 
+		
+			if (isGrounded)
+				verticalState =	VerticalState.Grounded;
 
 
 
@@ -209,7 +225,7 @@ namespace Sunnyland
 						}
 					} else
 					{
-						if (velocity.Y >= 0 && bbox.Center.Y < tileBounds.Top && intersection.Width > 2)
+						if (velocity.Y >= 0 && bbox.Center.Y < tileBounds.Top)
 						{
 							isGrounded = true;
 							velocity.Y = 0;
