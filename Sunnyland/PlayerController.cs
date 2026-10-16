@@ -26,27 +26,19 @@ namespace Sunnyland
 
 		private bool isGrounded;
 
-		private bool isDoubleJumping = false;
-
-		public bool IsDoubleJumping
-		{
-			get { return isDoubleJumping; }
-			set { isDoubleJumping = value; }
-		}
 
 		private bool IsMoving => velocity != Vector2.Zero;
 
-		private bool hasDoubleJumpedWhileInAir = false;
 
 		private bool IsFalling => velocity.Y > 0;
-		private bool IsJumping => velocity.Y < 0;
+		private bool IsAscending=> velocity.Y < 0;
 
 		private void SetOriginToBottomCenter()
 		{
 			data.Origin[id] = new Vector2(data.SourceRectangle[id].Width / 2, data.SourceRectangle[id].Height);
 		}
 
-		private enum VerticalState
+		public enum VerticalState
 		{
 			Grounded,
 			Jumping,
@@ -54,7 +46,12 @@ namespace Sunnyland
 			DoubleJumping
 		}
 
-		private VerticalState verticalState = VerticalState.Grounded;
+		public VerticalState verticalState = VerticalState.Grounded;
+
+		public void EndOfDoubleJump()
+		{
+			verticalState = VerticalState.Jumping;
+		}
 
 		public Rectangle BoundingBoxForCollision
 		{
@@ -106,12 +103,11 @@ namespace Sunnyland
 			if (input.Binding[InputAction.MoveLeft].Invoke())
 			{
 				
-				anim.Play("playerRun");
+	
 				data.SpriteEffects[id] = SpriteEffects.FlipHorizontally;
 				desiredHorizontalSpeed = -walkingSpeed;
 			} else if (input.Binding[InputAction.MoveRight].Invoke())
 			{
-				anim.Play("playerRun");
 				data.SpriteEffects[id] = SpriteEffects.None;
 				desiredHorizontalSpeed = walkingSpeed;
 			}
@@ -135,7 +131,7 @@ namespace Sunnyland
 
 			if (input.Binding[InputAction.Jump].Invoke() && isGrounded && verticalState == VerticalState.Grounded)
 			{
-				velocity.Y = -jumpSpeed;
+				 velocity.Y = -jumpSpeed;
 				isGrounded = false;
 				verticalState = VerticalState.Jumping;
 			}
@@ -148,15 +144,35 @@ namespace Sunnyland
 
 
 			
-				if (IsFalling)
-					anim.Play("playerFall");
+			if (IsFalling)
+				anim.Play("playerFall");
 
-				if (IsJumping)
+			if (IsAscending)
+			{
+				if (verticalState == VerticalState.Jumping)
 					anim.Play("playerJump");
+				else if (verticalState == VerticalState.DoubleJumping)
+					anim.Play("playerDoubleJump");
+
+			}
+
+
+					
 
 		
 			if (isGrounded)
-				verticalState =	VerticalState.Grounded;
+			{
+				verticalState = VerticalState.Grounded;
+
+				if (velocity.X == 0)
+				{
+					anim.Play("playerIdle");
+				} else
+				{
+					anim.Play("playerRun"); 
+				}
+			}
+				
 
 
 

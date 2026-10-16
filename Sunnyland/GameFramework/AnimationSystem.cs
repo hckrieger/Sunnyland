@@ -85,6 +85,7 @@ namespace Sunnyland.GameFramework
 						anim.Index = 0;
 
 						anim.EndOfAnimationAction?.Invoke();
+						Debug.WriteLine($"{anim.FrameIndices[0]} animation ended");
 						if (anim.IsLooping == false)
 						{
 							anim.IsPlaying = false;

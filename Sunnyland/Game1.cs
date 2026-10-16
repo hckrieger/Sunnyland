@@ -72,7 +72,7 @@ namespace Sunnyland
 			// TODO: Add your initialization logic here
 			displayManager = new DisplayManager(_graphics)
 			{
-				IsFullScreen = false
+				IsFullScreen = true
 			};
 
 			SetWindowSize(384, 240, 3);
@@ -145,8 +145,12 @@ namespace Sunnyland
 							animationSystem.InitializeAnimation("playerJump", jumpAnimation);
 							Animation fallAnimation = new Animation(obj.Name, cellSize, 1f, [31], id, true);
 							animationSystem.InitializeAnimation("playerFall", fallAnimation);
-							Animation doubleJumpAnimation = new Animation(obj.Name, cellSize, 1f, [54, 55, 56, 57], id, false);
-						//	doubleJumpAnimation.EndOfAnimationAction = () => playerController.IsDoubleJumping = false;
+
+							Animation doubleJumpAnimation = new Animation(obj.Name, cellSize, .08f, [54, 55, 56, 57], id, false)
+							{
+								EndOfAnimationAction = () => playerController.EndOfDoubleJump()
+							};
+							
 							animationSystem.InitializeAnimation("playerDoubleJump", doubleJumpAnimation);
 							break;
 						case "Gem":
