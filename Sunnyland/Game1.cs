@@ -72,7 +72,7 @@ namespace Sunnyland
 			// TODO: Add your initialization logic here
 			displayManager = new DisplayManager(_graphics)
 			{
-				IsFullScreen = false
+				IsFullScreen = true
 			};
 
 			SetWindowSize(384, 240, 3);

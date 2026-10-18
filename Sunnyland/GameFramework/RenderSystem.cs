@@ -53,8 +53,9 @@ namespace Sunnyland.GameFramework
 			{
 				if (renderableData.TextureName[i] != null)
 				{
+					
 					var texture = assetCache.GetData(renderableData.TextureName[i]);
-					spriteBatch.Draw(texture, renderableData.Position[i], renderableData.SourceRectangle[i], renderableData.Color[i], renderableData.Rotation[i], renderableData.Origin[i], renderableData.Scale[i], renderableData.SpriteEffects[i], renderableData.LayerDepth[i]);
+					spriteBatch.Draw(texture, Vector2.Round(renderableData.Position[i]), renderableData.SourceRectangle[i], renderableData.Color[i], renderableData.Rotation[i], renderableData.Origin[i], renderableData.Scale[i], renderableData.SpriteEffects[i], renderableData.LayerDepth[i]);
 				}
 			}
 		}
