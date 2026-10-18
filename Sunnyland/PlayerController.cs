@@ -127,7 +127,7 @@ namespace Sunnyland
 				isDoubleJumping = true;
 			}
 
-			if (input.Binding[InputAction.Jump].Invoke() && isGrounded && hasDoubleJumped)
+			if (input.Binding[InputAction.Jump].Invoke() && isGrounded)
 			{
 				 velocity.Y = -jumpSpeed;
 				isGrounded = false;
