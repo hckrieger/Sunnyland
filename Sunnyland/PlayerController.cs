@@ -4,6 +4,7 @@ using Sunnyland.GameFramework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -17,12 +18,12 @@ namespace Sunnyland
 	{
 		private RenderableData data;
 
-		private float gravity = 666f;
-		private float maxFallSpeed = 275f;
+		private float gravity = 700f;
+		private float maxFallSpeed = 300f;
 
 		private Vector2 velocity, startPosition;
 		private float walkingSpeed = 65f;
-		private float jumpSpeed = 200f;
+		private float jumpSpeed = 225f;
 
 		private bool isGrounded;
 
@@ -33,24 +34,21 @@ namespace Sunnyland
 		private bool IsFalling => velocity.Y > 0;
 		private bool IsAscending=> velocity.Y < 0;
 
+		private bool isDoubleJumping = false;
+		private bool hasDoubleJumped = true;
+
 		private void SetOriginToBottomCenter()
 		{
 			data.Origin[id] = new Vector2(data.SourceRectangle[id].Width / 2, data.SourceRectangle[id].Height);
 		}
 
-		public enum VerticalState
-		{
-			Grounded,
-			Jumping,
 
-			DoubleJumping
-		}
 
-		public VerticalState verticalState = VerticalState.Grounded;
 
 		public void EndOfDoubleJump()
 		{
-			verticalState = VerticalState.Jumping;
+			isDoubleJumping = false;
+			hasDoubleJumped = true;
 		}
 
 		public Rectangle BoundingBoxForCollision
@@ -122,18 +120,18 @@ namespace Sunnyland
 					
 			}
 
-			if (input.Binding[InputAction.Jump].Invoke() && !isGrounded && verticalState == VerticalState.Jumping)
+			if (input.Binding[InputAction.Jump].Invoke() && !isGrounded && !isDoubleJumping && !hasDoubleJumped)
 			{
 				velocity.Y = -jumpSpeed;
-				verticalState = VerticalState.DoubleJumping;
-				anim.Play("playerDoubleJump");
+				//anim.Play("playerDoubleJump");
+				isDoubleJumping = true;
 			}
 
-			if (input.Binding[InputAction.Jump].Invoke() && isGrounded && verticalState == VerticalState.Grounded)
+			if (input.Binding[InputAction.Jump].Invoke() && isGrounded && hasDoubleJumped)
 			{
 				 velocity.Y = -jumpSpeed;
 				isGrounded = false;
-				verticalState = VerticalState.Jumping;
+				hasDoubleJumped = false;
 			}
 
 			if (input.Binding[InputAction.JumpRelease].Invoke() && velocity.Y < 0)
@@ -143,35 +141,55 @@ namespace Sunnyland
 
 
 
-			
-			if (IsFalling)
-				anim.Play("playerFall");
-
-			if (IsAscending)
+			if (isGrounded)
 			{
-				if (verticalState == VerticalState.Jumping)
-					anim.Play("playerJump");
-				else if (verticalState == VerticalState.DoubleJumping)
+				if (!hasDoubleJumped)
+					hasDoubleJumped = true;
+
+				if (velocity.X == 0)
+					anim.Play("playerIdle");
+				else
+					anim.Play("playerRun");
+			} else {
+				if (!isDoubleJumping)
+				{
+					if (IsFalling)
+					{
+						anim.Play("playerFall");
+					}
+					else if (IsAscending)
+					{
+						anim.Play("playerJump");
+					}
+				}
+				else
+				{
 					anim.Play("playerDoubleJump");
+				}
 
 			}
+
+
+			
+
+			
+			//if (IsFalling)
+			//	anim.Play("playerFall");
+
+			//if (IsAscending)
+			//{
+			//	if (isDoubleJumping == false)
+			//		anim.Play("playerJump");
+			//	else if (verticalState == VerticalState.DoubleJumping)
+			//		anim.Play("playerDoubleJump");
+
+			//}
 
 
 					
 
 		
-			if (isGrounded)
-			{
-				verticalState = VerticalState.Grounded;
 
-				if (velocity.X == 0)
-				{
-					anim.Play("playerIdle");
-				} else
-				{
-					anim.Play("playerRun"); 
-				}
-			}
 				
 
 
