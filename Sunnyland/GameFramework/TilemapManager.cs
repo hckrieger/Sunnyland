@@ -36,8 +36,7 @@ namespace Sunnyland.GameFramework
 
 		private Texture2D GetTexture(int gid)
 		{
-			var tileset = GetTileSet(gid);
-			Debug.WriteLine($"{tileset.Image}");
+			TileSet tileset = GetTileSet(gid);
 			string tilesetTexturePath = Path.ChangeExtension(tileset.Image, null);
 			
 			return Content.Load<Texture2D>(tilesetTexturePath);
@@ -125,7 +124,7 @@ namespace Sunnyland.GameFramework
 				{
 					if (layer.Data[i] == 0)
 						continue;
-					spriteBatch.Draw(GetTexture(i), TilePosition(i, layer.Data[i]), GetSourceRectangle(layer.Data[i]), Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, .5f);	
+					spriteBatch.Draw(GetTexture(layer.Data[i]), TilePosition(i, layer.Data[i]), GetSourceRectangle(layer.Data[i]), Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, .5f);	
 				}
 				
 			}
