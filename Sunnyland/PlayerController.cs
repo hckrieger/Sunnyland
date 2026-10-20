@@ -98,13 +98,13 @@ namespace Sunnyland
 			float desiredHorizontalSpeed;
 
 
-			if (input.Binding[InputAction.MoveLeft].Invoke())
+			if (input.Binding[InputAction.MoveLeft].Invoke() && BoundingBoxForCollision.Left > 0)
 			{
 				
 	
 				data.SpriteEffects[id] = SpriteEffects.FlipHorizontally;
 				desiredHorizontalSpeed = -walkingSpeed;
-			} else if (input.Binding[InputAction.MoveRight].Invoke())
+			} else if (input.Binding[InputAction.MoveRight].Invoke() && BoundingBoxForCollision.Right < tilemap.Width * tilemap.TileWidth)
 			{
 				data.SpriteEffects[id] = SpriteEffects.None;
 				desiredHorizontalSpeed = walkingSpeed;
@@ -252,7 +252,7 @@ namespace Sunnyland
 
 					if (intersection.Width < intersection.Height)
 					{
-						if ((velocity.X >= 0 && bbox.Center.X < tileBounds.Left) ||
+						if ((velocity.X >= 0 && (bbox.Center.X < tileBounds.Left)) ||
 							(velocity.X <= 0 && bbox.Center.X > tileBounds.Right))
 						{
 							data.Position[id].X = previousPosition.X;
