@@ -119,18 +119,25 @@ namespace Sunnyland
 
 					Point cellSize = new Point(cellWidth, cellHeight);
 
-					textureCache.Add(obj.Name, texturePath);
 
+					
+					RenderableDataInstance instanceData = default;
 
-					RenderableDataInstance instanceData = new RenderableDataInstance
+					if (texturePath != null)
 					{
-						Position = new Vector2(obj.X, obj.Y),
-						TextureName = obj.Name,
-						Origin = new Vector2(xOrigin, yOrigin),
-						SourceRectangle = Utils.GetRectangleSource(sourceIndex, textureCache.GetData(obj.Name).Bounds.Width, cellSize)
-					};
 
-					var id = renderSystem.AddRenderableObjectData(instanceData);
+						textureCache.Add(obj.Name, texturePath);
+						instanceData = new RenderableDataInstance
+						{
+							Position = new Vector2(obj.X, obj.Y),
+							TextureName = obj.Name,
+							Origin = new Vector2(xOrigin, yOrigin),
+							SourceRectangle = Utils.GetRectangleSource(sourceIndex, textureCache.GetData(obj.Name).Bounds.Width, cellSize)
+						};
+					}
+
+
+					var id = (instanceData.TextureName != null) ? renderSystem.AddRenderableObjectData(instanceData) : -1;
 
 					switch (obj.Name)
 					{
@@ -166,8 +173,8 @@ namespace Sunnyland
 							animationSystem.Play("cherry");
 
 							break;
-					
 					}
+
 				}
 			}
 		

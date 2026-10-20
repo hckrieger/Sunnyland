@@ -29,6 +29,29 @@
          "y":0
         }, 
         {
+         "draworder":"topdown",
+         "id":7,
+         "name":"Trigger Areas",
+         "objects":[
+                {
+                 "height":32,
+                 "id":39,
+                 "name":"End Area",
+                 "opacity":1,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":320,
+                 "y":160
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -97,7 +120,7 @@
                  "visible":true,
                  "width":0,
                  "x":32,
-                 "y":96
+                 "y":192
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -105,8 +128,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":7,
- "nextobjectid":36,
+ "nextlayerid":8,
+ "nextobjectid":40,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.12.2",

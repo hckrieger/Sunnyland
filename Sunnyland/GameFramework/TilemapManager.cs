@@ -48,7 +48,6 @@ namespace Sunnyland.GameFramework
 			{
 				if (gid >= TileMap.TileSets[i].FirstGid)
 				{
-					//Debug.WriteLine($"{TileMap.TileSets[i].Image}");
 					return TileMap.TileSets[i];
 				}
 			}
