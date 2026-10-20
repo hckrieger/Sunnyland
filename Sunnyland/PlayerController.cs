@@ -225,7 +225,6 @@ namespace Sunnyland
 			Point bottomRightTile = tilemapManager.GetTileCoordinates(new Vector2(bbox.Right, bbox.Bottom)) + new Point(1, 1);
 
 
-			//	Debug.WriteLine($"Left: {leftTile} - Right: {rightTile}\nTop: {topTile} - Bottom {bottomTile}\n");
 
 
 			for (int y = topLeftTile.Y; y < bottomRightTile.Y + 1; y++)

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
@@ -36,21 +37,19 @@ namespace Sunnyland.GameFramework
 		private Texture2D GetTexture(int gid)
 		{
 			var tileset = GetTileSet(gid);
-
-			string path = Path.GetDirectoryName(tileset.Image);
-			string filename = Path.GetFileNameWithoutExtension(tileset.Image);
-			var splitContentPath = path.Split("Content\\");
-			var contentPath = splitContentPath[1];
-
-			return Content.Load<Texture2D>($"{contentPath}/{filename}");
+			Debug.WriteLine($"{tileset.Image}");
+			string tilesetTexturePath = Path.ChangeExtension(tileset.Image, null);
+			
+			return Content.Load<Texture2D>(tilesetTexturePath);
 		}
 
 		private TileSet GetTileSet(int gid)
 		{
 			for (int i = TileMap.TileSets.Count - 1; i >= 0; i--)
 			{
-				if (TileMap.TileSets[i].FirstGid <= gid)
+				if (gid >= TileMap.TileSets[i].FirstGid)
 				{
+					//Debug.WriteLine($"{TileMap.TileSets[i].Image}");
 					return TileMap.TileSets[i];
 				}
 			}
