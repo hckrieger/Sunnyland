@@ -34,16 +34,15 @@
          "name":"Trigger Areas",
          "objects":[
                 {
-                 "height":32,
+                 "height":112,
                  "id":39,
                  "name":"End Area",
-                 "opacity":1,
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":16,
+                 "width":64,
                  "x":320,
-                 "y":160
+                 "y":80
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -97,7 +96,6 @@
                  "height":0,
                  "id":1,
                  "name":"Player",
-                 "opacity":1,
                  "point":true,
                  "properties":[
                         {
@@ -132,7 +130,7 @@
  "nextobjectid":40,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.12.2",
+ "tiledversion":"1.11.2",
  "tileheight":16,
  "tilesets":[
         {

@@ -14,15 +14,6 @@ using static Sunnyland.GameFramework.InputManager;
 
 namespace Sunnyland
 {
-	public enum GameState
-	{
-		Pause,
-		IsPlaying,
-		DeathSequence,
-		Victory,
-		GameOver	
-	}
-
 	public class PlayerController
 	{
 		private RenderableData data;
@@ -35,11 +26,6 @@ namespace Sunnyland
 		private float jumpSpeed = 225f;
 
 		private bool isGrounded;
-
-
-		private bool IsMoving => velocity != Vector2.Zero;
-
-
 		private bool IsFalling => velocity.Y > 0;
 		private bool IsAscending=> velocity.Y < 0;
 
@@ -65,9 +51,6 @@ namespace Sunnyland
 			get
 			{
 				Rectangle localRectangle = new Rectangle(11, 12, 12, 20);
-
-				//Vector2 position = data.Position[id] - data.Origin[id];
-				//return new Rectangle(6 + (int)position.X, 10 + (int)position.Y, 18, 22 + feetMargin);
 				Vector2 position = data.Position[id];
 				Vector2 origin = data.Origin[id];
 				position -= origin;
@@ -183,31 +166,6 @@ namespace Sunnyland
 			{
 				anim.Play("playerWin");
 			}
-			else
-			{
-				Debug.WriteLine("---");
-			}
-
-			
-			//if (IsFalling)
-			//	anim.Play("playerFall");
-
-			//if (IsAscending)
-			//{
-			//	if (isDoubleJumping == false)
-			//		anim.Play("playerJump");
-			//	else if (verticalState == VerticalState.DoubleJumping)
-			//		anim.Play("playerDoubleJump");
-
-			//}
-
-
-					
-
-		
-
-				
-
 
 
 			SetOriginToBottomCenter();
