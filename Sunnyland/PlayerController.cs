@@ -14,6 +14,15 @@ using static Sunnyland.GameFramework.InputManager;
 
 namespace Sunnyland
 {
+	public enum GameState
+	{
+		Pause,
+		IsPlaying,
+		DeathSequence,
+		Victory,
+		GameOver	
+	}
+
 	public class PlayerController
 	{
 		private RenderableData data;
@@ -91,7 +100,7 @@ namespace Sunnyland
 
 
 
-		public void Update(GameTime gameTime, InputManager input, AnimationSystem anim)
+		public void Update(GameTime gameTime, InputManager input, AnimationSystem anim, Rectangle winRectangleTrigger)
 		{
 			//playerData.Position[Id] += new Vector2(1, 0) * (float)gameTime.ElapsedGameTime.TotalSeconds * 25f;
 			Vector2 previousPosition = data.Position[id];
@@ -170,7 +179,14 @@ namespace Sunnyland
 			}
 
 
-			
+			if (BoundingBoxForCollision.Intersects(winRectangleTrigger) && isGrounded)
+			{
+				anim.Play("playerWin");
+			}
+			else
+			{
+				Debug.WriteLine("---");
+			}
 
 			
 			//if (IsFalling)

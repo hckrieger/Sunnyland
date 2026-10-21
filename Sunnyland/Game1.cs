@@ -32,9 +32,12 @@ namespace Sunnyland
 		private DataCache<Texture2D> textureCache;
 
 		private PlayerController playerController;
+		private Rectangle winRectangleTrigger;
 		private AnimationSystem animationSystem;
 
 		private Dictionary<string, List<TileObject>> gameObjects = new Dictionary<string, List<TileObject>>();
+
+
 
 		public Game1()
 		{
@@ -159,6 +162,9 @@ namespace Sunnyland
 							};
 							
 							animationSystem.InitializeAnimation("playerDoubleJump", doubleJumpAnimation);
+
+							Animation winAnimation = new Animation(obj.Name, cellSize, 1f, [66], id);
+							animationSystem.InitializeAnimation("playerWin", winAnimation);
 							break;
 						case "Gem":
 							Animation gemAnimation = new Animation(obj.Name, cellSize, .18f, [0, 1, 2, 3], id, true);
@@ -172,6 +178,9 @@ namespace Sunnyland
 
 							animationSystem.Play("cherry");
 
+							break;
+						case "End Area":
+							winRectangleTrigger = new Rectangle((int)obj.X, (int)obj.Y, (int)obj.Width, (int)obj.Height);
 							break;
 					}
 
@@ -189,6 +198,7 @@ namespace Sunnyland
 		}
 		
 
+	
 		
 
 		protected override void LoadContent()
@@ -206,7 +216,9 @@ namespace Sunnyland
 
 			inputManager.Update();
 
-			playerController.Update(gameTime, inputManager, animationSystem);
+			playerController.Update(gameTime, inputManager, animationSystem, winRectangleTrigger);
+
+
 
 			animationSystem.Update(gameTime);
 
