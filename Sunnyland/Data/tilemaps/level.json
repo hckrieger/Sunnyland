@@ -37,6 +37,7 @@
                  "height":112,
                  "id":39,
                  "name":"End Area",
+                 "opacity":1,
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -96,6 +97,7 @@
                  "height":0,
                  "id":1,
                  "name":"Player",
+                 "opacity":1,
                  "point":true,
                  "properties":[
                         {
@@ -130,7 +132,7 @@
  "nextobjectid":40,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.11.2",
+ "tiledversion":"1.12.2",
  "tileheight":16,
  "tilesets":[
         {

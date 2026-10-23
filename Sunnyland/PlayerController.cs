@@ -86,13 +86,16 @@ namespace Sunnyland
 		public void Update(GameTime gameTime, InputManager input, AnimationSystem anim, Rectangle winRectangleTrigger)
 		{
 			//playerData.Position[Id] += new Vector2(1, 0) * (float)gameTime.ElapsedGameTime.TotalSeconds * 25f;
+
+			if (Game1.CurrentGameState != Game1.GameState.IsPlaying)
+				return;
+
 			Vector2 previousPosition = data.Position[id];
 			float desiredHorizontalSpeed;
 
 
 			if (input.Binding[InputAction.MoveLeft].Invoke() && BoundingBoxForCollision.Left > 0)
 			{
-				
 	
 				data.SpriteEffects[id] = SpriteEffects.FlipHorizontally;
 				desiredHorizontalSpeed = -walkingSpeed;
@@ -165,6 +168,7 @@ namespace Sunnyland
 			if (BoundingBoxForCollision.Intersects(winRectangleTrigger) && isGrounded)
 			{
 				anim.Play("playerWin");
+				Game1.CurrentGameState = Game1.GameState.Win;
 			}
 
 

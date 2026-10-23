@@ -16,13 +16,9 @@ namespace Sunnyland
 		private SpriteBatch _spriteBatch;
 		private DisplayManager displayManager;
 		private RenderTarget2D renderTarget;
-		private Texture2D texture, square;
+		private Texture2D texture;
 
 		private InputManager inputManager;
-
-		private float speed = 50f;
-
-		private Vector2 position;
 
 		private TilemapManager tilemapManager;
 
@@ -37,6 +33,14 @@ namespace Sunnyland
 
 		private Dictionary<string, List<TileObject>> gameObjects = new Dictionary<string, List<TileObject>>();
 
+		public enum GameState
+		{
+			IsPlaying,
+			Win,
+
+		}
+
+		public static GameState CurrentGameState { get; set; }
 
 
 		public Game1()
@@ -70,6 +74,17 @@ namespace Sunnyland
 			SetRenderTarget();
 		}
 
+		private void ResetLevel()
+		{
+			foreach (KeyValuePair<string, List<TileObject>> kvp in gameObjects)
+			{
+				foreach (var obj in kvp.Value)
+				{
+
+				}
+			}
+		}
+
 		protected override void Initialize()
 		{
 			// TODO: Add your initialization logic here
@@ -79,6 +94,7 @@ namespace Sunnyland
 			};
 
 			SetWindowSize(384, 240, 3);
+			CurrentGameState = GameState.IsPlaying;
 
 			tilemapManager = new TilemapManager("Data/tilemaps/level.json", Content);
 			textureCache = new DataCache<Texture2D>(Content.Load<Texture2D>);
@@ -221,6 +237,11 @@ namespace Sunnyland
 
 
 			animationSystem.Update(gameTime);
+
+			if (CurrentGameState != GameState.IsPlaying && inputManager.IsKeyPressed(Keys.Enter))
+			{
+				
+			}
 
 			base.Update(gameTime);
 		}

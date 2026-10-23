@@ -76,6 +76,7 @@ namespace Sunnyland.GameFramework
 
 	public struct RenderableDataInstance()
 	{
+		public string ObjectName = string.Empty;
 		public Vector2 Position = Vector2.Zero;
 		public string TextureName = "";
 		public Rectangle SourceRectangle = Rectangle.Empty;
