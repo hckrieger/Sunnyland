@@ -74,16 +74,7 @@ namespace Sunnyland
 			SetRenderTarget();
 		}
 
-		private void ResetLevel()
-		{
-			foreach (KeyValuePair<string, List<TileObject>> kvp in gameObjects)
-			{
-				foreach (var obj in kvp.Value)
-				{
 
-				}
-			}
-		}
 
 		protected override void Initialize()
 		{
