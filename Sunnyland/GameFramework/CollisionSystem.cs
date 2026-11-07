@@ -10,7 +10,7 @@ namespace Sunnyland.GameFramework
 {
 	public class CollisionSystem
 	{
-		public 
+		private Dictionary<string, CollisionData> collisions = new Dictionary<string, CollisionData>();
 	}
 
 	public class CollisionData
