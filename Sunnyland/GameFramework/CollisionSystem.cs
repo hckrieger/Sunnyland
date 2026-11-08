@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -16,11 +17,37 @@ namespace Sunnyland.GameFramework
 		Absolute
 	}
 
-	public class CollisionSystem(RenderSystem renderSystem)
+	public class CollisionSystem
 	{
 		private Dictionary<string, Collision> collisions = new Dictionary<string, Collision>();
-		private RenderSystem renderSystem = renderSystem;
+		private RenderSystem renderSystem;
 
+		public event EventHandler<CollisionEventArgs> HandleCollision;
+
+
+
+		public CollisionSystem(RenderSystem renderSystem)
+		{
+			this.renderSystem = renderSystem;
+
+		}
+
+		//private void CheckCollisions(object sender, CollisionEventArgs e)
+		//{
+		//	var collisionList = collisions.Values.ToList();
+		//	for (int i = 0; i < collisionList.Count; i++)
+		//	{
+		//		for (int j = i + 1; j < collisionList.Count; j++)
+		//		{
+		//			Rectangle bounds1 = GetCollisionBounds(e.BoundingBox1.Id);
+		//			Rectangle bounds2 = GetCollisionBounds(e.BoundingBox2.Id);
+		//			if (bounds1.Intersects(bounds2))
+		//			{
+		//				HandleCollision.Invoke(sender, e);
+		//			}
+		//		}
+		//	}
+		//}
 
 		public void InitializeCollision(string name, int id, Rectangle bounds)
 		{
@@ -73,7 +100,7 @@ namespace Sunnyland.GameFramework
 			throw new Exception($"No collision found for id {id}");
 		}
 
-		public Rectangle GetCollisionBounds(int id)
+		private Rectangle GetBoundingBox(int id)
 		{
 			Collision collision = localCollisions(id);
 			Vector2 position = renderSystem.Data.Position[id];

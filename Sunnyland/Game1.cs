@@ -185,6 +185,8 @@ namespace Sunnyland
 							Animation gemAnimation = new Animation(obj.Name, cellSize, .18f, [0, 1, 2, 3], id, true);
 							animationSystem.InitializeAnimation("gem", gemAnimation);
 							animationSystem.Play("gem");
+							Rectangle boundingBox = new Rectangle(1, 1, 13, 11);
+							collisionSystem.InitializeCollision("Gem", id, boundingBox);
 							break;
 						case "Cherry":
 							Animation cherryAnimation = new Animation(obj.Name, cellSize, .25f, [0, 1, 2, 3, 4, 3, 2, 1], id, true);
@@ -203,8 +205,7 @@ namespace Sunnyland
 			}
 		
 			
-
-
+	
 
 
 
