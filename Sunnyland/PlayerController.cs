@@ -31,14 +31,7 @@ namespace Sunnyland
 
 		private bool isDoubleJumping = false;
 		private bool hasDoubleJumped = true;
-		//public Rectangle BoundingBoxForCollision { get; set; }
-
-		private void SetOriginToBottomCenter()
-		{
-			data.Origin[id] = new Vector2(data.SourceRectangle[id].Width / 2, data.SourceRectangle[id].Height);
-		}
-
-
+		public Rectangle BoundingBoxForCollision => collisionSystem.GetCollisionBounds(id);
 
 
 		public void EndOfDoubleJump()
@@ -47,39 +40,19 @@ namespace Sunnyland
 			hasDoubleJumped = true;
 		}
 
-		public Rectangle BoundingBoxForCollision
-		{
-			get
-			{
-				Rectangle localRectangle = new Rectangle(11, 12, 12, 20);
-				Vector2 position = data.Position[id];
-				Vector2 origin = data.Origin[id];
-				position -= origin;
-
-				Rectangle bbox = new Rectangle(
-					(int)position.X + localRectangle.X,
-					(int)position.Y + localRectangle.Y,
-					localRectangle.Width,
-					localRectangle.Height + 1);
-
-
-
-				return bbox;
-			}
-		}
 
 		private int id;
 		private TileMap tilemap;
 		private TilemapManager tilemapManager;
+		private CollisionSystem collisionSystem;
 
 		public PlayerController(int id, Game game)
 		{
 			this.id = id;
 			data = game.Services.GetService<RenderSystem>().Data;
 			tilemapManager = game.Services.GetService<TilemapManager>();
-			//BoundingBoxForCollision = game.Services.GetService<CollisionSystem>().GetCollisionBounds(id);
+			collisionSystem = game.Services.GetService<CollisionSystem>();
 			tilemap = tilemapManager.TileMap;
-			SetOriginToBottomCenter();
 			
 		}
 
@@ -87,7 +60,6 @@ namespace Sunnyland
 
 		public void Update(GameTime gameTime, InputManager input, AnimationSystem anim, Rectangle winRectangleTrigger)
 		{
-			//playerData.Position[Id] += new Vector2(1, 0) * (float)gameTime.ElapsedGameTime.TotalSeconds * 25f;
 
 			if (Game1.CurrentGameState != Game1.GameState.IsPlaying)
 				return;
@@ -174,7 +146,6 @@ namespace Sunnyland
 			}
 
 
-			SetOriginToBottomCenter();
 
 			velocity.X += (desiredHorizontalSpeed - velocity.X);
 

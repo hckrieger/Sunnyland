@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -86,7 +87,7 @@ namespace Sunnyland.GameFramework
 				collision.Height);
 
 
-
+			Debug.WriteLine($"{bbox}");
 			return bbox;
 		}
 
