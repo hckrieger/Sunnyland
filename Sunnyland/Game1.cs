@@ -30,6 +30,7 @@ namespace Sunnyland
 		private PlayerController playerController;
 		private Rectangle winRectangleTrigger;
 		private AnimationSystem animationSystem;
+		private CollisionSystem collisionSystem;
 
 		private Dictionary<string, List<TileObject>> gameObjects = new Dictionary<string, List<TileObject>>();
 
@@ -93,11 +94,13 @@ namespace Sunnyland
 			textureCache = new DataCache<Texture2D>(Content.Load<Texture2D>);
 			renderSystem = new RenderSystem(24, textureCache);
 			inputManager = new InputManager(displayManager, InputManager.BindingType.Platformer);
+			collisionSystem = new CollisionSystem(renderSystem);
 
 			Services.AddService(typeof(TilemapManager), tilemapManager);	
 			Services.AddService(typeof(RenderSystem), renderSystem);
 			Services.AddService(typeof(DataCache<Texture2D>), textureCache);
 			Services.AddService(typeof(InputManager), inputManager);
+			Services.AddService(typeof(CollisionSystem), collisionSystem);
 
 			animationSystem = new AnimationSystem(this);
 
@@ -130,9 +133,6 @@ namespace Sunnyland
 					int cellHeight = Utils.GetValue<int>(obj.Properties, "cell height");
 
 					Point cellSize = new Point(cellWidth, cellHeight);
-
-
-					
 					RenderableDataInstance instanceData = default;
 
 					if (texturePath != null)
@@ -154,6 +154,9 @@ namespace Sunnyland
 					switch (obj.Name)
 					{
 						case "Player":
+							
+							Rectangle BoundingBox = new Rectangle(11, 13, 12, 20);
+							collisionSystem.InitializeCollision("Player", id, BoundingBox);
 							playerController = new PlayerController(id, this);
 							Animation idleAnimation = new Animation(obj.Name, cellSize, .21f, [0, 1, 2, 3], id, true);
 							animationSystem.InitializeAnimation("playerIdle", idleAnimation);
@@ -169,11 +172,14 @@ namespace Sunnyland
 							{
 								EndOfAnimationAction = () => playerController.EndOfDoubleJump()
 							};
+
 							
+
 							animationSystem.InitializeAnimation("playerDoubleJump", doubleJumpAnimation);
 
 							Animation winAnimation = new Animation(obj.Name, cellSize, 1f, [66], id);
 							animationSystem.InitializeAnimation("playerWin", winAnimation);
+							
 							break;
 						case "Gem":
 							Animation gemAnimation = new Animation(obj.Name, cellSize, .18f, [0, 1, 2, 3], id, true);

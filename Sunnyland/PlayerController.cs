@@ -31,6 +31,7 @@ namespace Sunnyland
 
 		private bool isDoubleJumping = false;
 		private bool hasDoubleJumped = true;
+		//public Rectangle BoundingBoxForCollision { get; set; }
 
 		private void SetOriginToBottomCenter()
 		{
@@ -61,8 +62,8 @@ namespace Sunnyland
 					localRectangle.Width,
 					localRectangle.Height + 1);
 
-				
-				
+
+
 				return bbox;
 			}
 		}
@@ -76,6 +77,7 @@ namespace Sunnyland
 			this.id = id;
 			data = game.Services.GetService<RenderSystem>().Data;
 			tilemapManager = game.Services.GetService<TilemapManager>();
+			//BoundingBoxForCollision = game.Services.GetService<CollisionSystem>().GetCollisionBounds(id);
 			tilemap = tilemapManager.TileMap;
 			SetOriginToBottomCenter();
 			

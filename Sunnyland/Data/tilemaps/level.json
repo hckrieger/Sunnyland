@@ -37,7 +37,6 @@
                  "height":112,
                  "id":39,
                  "name":"End Area",
-                 "opacity":1,
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -399,7 +398,6 @@
                  "height":0,
                  "id":1,
                  "name":"Player",
-                 "opacity":1,
                  "point":true,
                  "properties":[
                         {
@@ -416,6 +414,16 @@
                          "name":"texture path",
                          "type":"string",
                          "value":"Characters\/Foxy\/atlas"
+                        }, 
+                        {
+                         "name":"x origin",
+                         "type":"int",
+                         "value":16
+                        }, 
+                        {
+                         "name":"y origin",
+                         "type":"int",
+                         "value":32
                         }],
                  "rotation":0,
                  "type":"",
@@ -434,7 +442,7 @@
  "nextobjectid":54,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.12.2",
+ "tiledversion":"1.11.2",
  "tileheight":16,
  "tilesets":[
         {

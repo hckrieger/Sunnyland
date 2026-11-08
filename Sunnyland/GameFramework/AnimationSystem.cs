@@ -9,7 +9,6 @@ namespace Sunnyland.GameFramework
 	public class AnimationSystem
 	{
 		private Dictionary<string, Animation> animations = new Dictionary<string, Animation>();
-		public Animation CurrentAnimation { get; set; }
 
 		private DataCache<Texture2D> textureCache;
 		private RenderSystem renderSystem;
