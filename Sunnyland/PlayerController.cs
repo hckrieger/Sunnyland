@@ -31,7 +31,7 @@ namespace Sunnyland
 
 		private bool isDoubleJumping = false;
 		private bool hasDoubleJumped = true;
-		public Rectangle BoundingBoxForCollision => collisionSystem.GetCollisionBounds(id);
+		public Rectangle BoundingBoxForCollision => collisionSystem.GetBoundingBox("Player");
 
 
 		public void EndOfDoubleJump()
@@ -157,6 +157,19 @@ namespace Sunnyland
 			data.Position[id] += dt * velocity;
 
 			HandleTileCollision(previousPosition);
+
+
+			if (BoundingBoxForCollision.Intersects(collisionSystem.GetBoundingBox("Gem")))
+			{
+				Debug.WriteLine("Collected Gem");
+			}
+			else if (BoundingBoxForCollision.Intersects(collisionSystem.GetBoundingBox("cherry")))
+			{
+				Debug.WriteLine("Collected Cherry");
+			} else
+			{
+				Debug.WriteLine("");
+			}
 		}
 
 		private void ApplyGravity(float dt)
