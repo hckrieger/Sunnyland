@@ -244,6 +244,16 @@ namespace Sunnyland
 			}
 
 			base.Update(gameTime);
+
+			collisionSystem.CheckOneToManyCollision("Player", "Gem", () =>
+			{
+				Debug.WriteLine($"Player collided with Gem");
+			});
+
+			collisionSystem.CheckOneToManyCollision("Player", "cherry", () =>
+			{
+				Debug.WriteLine($"Player collided with Cherry");
+			});
 		}
 
 		protected override void Draw(GameTime gameTime)

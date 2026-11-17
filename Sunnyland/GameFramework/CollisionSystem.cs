@@ -19,7 +19,7 @@ namespace Sunnyland.GameFramework
 
 	public class CollisionSystem
 	{
-		private Dictionary<string, Collision> collisions = new Dictionary<string, Collision>();
+		private List<Collision> collisions = new List<Collision>();
 		private RenderSystem renderSystem;
 
 		public event EventHandler<CollisionEventArgs> HandleCollision;
@@ -52,14 +52,14 @@ namespace Sunnyland.GameFramework
 		public void InitializeCollision(string name, int id, Rectangle bounds)
 		{
 			
-			Collision collision = new Collision(id, bounds);
-			collisions[name] = collision;
+			Collision collision = new Collision(id, name, bounds);
+			collisions.Add(collision);
 		}
 
 		public void ChangeCollisionBounds(string collisionName, Point origin, Point size, BoundsChangeType changeType = BoundsChangeType.Relative)
 		{
 
-			if (collisions.TryGetValue(collisionName, out Collision collision))
+			if (collisions.FirstOrDefault(c => c.Key == collisionName) is Collision collision)
 			{
 				switch (changeType)
 				{
@@ -80,31 +80,13 @@ namespace Sunnyland.GameFramework
 
 		}
 
-		private Collision localCollisions(int id)
-		{
-			if (collisions.Count(m => m.Value.Id == id) > 1)
-			{
-				foreach (var collision in collisions)
-				{
-					if (collision.Value.Id == id)
-					{
-						return collision.Value;
-					}
-				}
-			} else if (collisions.Count(m => m.Value.Id == id) == 1)
-			{
-				return collisions.First(m => m.Value.Id == id).Value;
-				
-			}
 
-			throw new Exception($"No collision found for id {id}");
-		}
 
 		public Rectangle GetBoundingBox(int id)
 		{
-			Collision collision = localCollisions(id);
 			Vector2 position = renderSystem.Data.Position[id];
 			Vector2 origin = renderSystem.Data.Origin[id];
+			Collision collision = collisions.FirstOrDefault(c => c.Id == id);
 			position -= origin;
 
 			Rectangle bbox = new Rectangle(
@@ -117,41 +99,27 @@ namespace Sunnyland.GameFramework
 			return bbox;
 		}
 
-		private Collision localCollisions(string name)
+
+
+
+		public void CheckOneToManyCollision(string boxName, string multipleBoxes, Action execution)
 		{
-			if (collisions.Count(m => m.Key == name) > 1)
+			var collision = collisions.FirstOrDefault(c => c.Key == boxName);
+
+			if (collision == null)
+				return;
+
+			Rectangle bbox1 = GetBoundingBox(collision.Id);
+
+			foreach (var otherCollision in collisions.Where(c => c.Key == multipleBoxes))
 			{
-				foreach (var collision in collisions)
-				{
-					if (collision.Key == name)
-					{
-						return collision.Value;
-					}
-				}
-			}
-			else if (collisions.Count(m => m.Key == name) == 1)
-			{
-				return collisions.First(m => m.Key == name).Value;
+				Rectangle bbox2 = GetBoundingBox(otherCollision.Id);
+
+				if (bbox1.Intersects(bbox2))
+					execution?.Invoke();
+				
 			}
 
-			throw new Exception($"No collision found for {name}");
-		}
-
-		public Rectangle GetBoundingBox(string name)
-		{
-			Collision collision = localCollisions(name);
-			Vector2 position = renderSystem.Data.Position[collision.Id];
-			Vector2 origin = renderSystem.Data.Origin[collision.Id];
-			position -= origin;
-
-			Rectangle bbox = new Rectangle(
-				(int)position.X + collision.X,
-				(int)position.Y + collision.Y,
-				collision.Width,
-				collision.Height);
-
-
-			return bbox;
 		}
 
 
@@ -163,14 +131,17 @@ namespace Sunnyland.GameFramework
 	public class Collision
 	{
 
-		public Collision(int id, Rectangle localBounds)
+		public Collision(int id, string key, Rectangle localBounds)
 		{
 			Id = id;
+			Key = key;
 			X = localBounds.X;
 			Y = localBounds.Y;
 			Width = localBounds.Width;
 			Height = localBounds.Height;
 		}
+
+		public string Key { get; set; }
 		public int Id { get; set; }
 		public int X { get; set; }
 		public int Y { get; set; }
