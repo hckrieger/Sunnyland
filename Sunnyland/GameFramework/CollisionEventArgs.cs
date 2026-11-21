@@ -9,13 +9,12 @@ namespace Sunnyland.GameFramework
 {
 	public class CollisionEventArgs : EventArgs
 	{
-		public Rectangle BoundingBox1 { get; set; }
-		public Rectangle BoundingBox2 { get; set; }
-
-		public CollisionEventArgs(Rectangle boundingBox1, Rectangle boundingBox2)
+		public int OneId { get; set; }
+		public int ManyId { get; set; }
+		public CollisionEventArgs(int id1, int id2)
 		{
-			BoundingBox1 = boundingBox1;
-			BoundingBox2 = boundingBox2;
+			OneId = id1;
+			ManyId = id2;
 		}
 	}
 	

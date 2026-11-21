@@ -43,6 +43,7 @@ namespace Sunnyland.GameFramework
 			renderableData.Scale[index] = renderableObject.Scale;
 			renderableData.SpriteEffects[index] = renderableObject.SpriteEffects;
 			renderableData.LayerDepth[index] = renderableObject.LayerDepth;
+			renderableData.IsActive[index] = renderableObject.IsActive;
 			return index++;
 		}
 
@@ -51,7 +52,7 @@ namespace Sunnyland.GameFramework
 		{
 			for (int i = 0; i < capacity; i++)
 			{
-				if (renderableData.TextureName[i] != null)
+				if (renderableData.TextureName[i] != null && renderableData.IsActive[i])
 				{
 					
 					var texture = assetCache.GetData(renderableData.TextureName[i]);
@@ -72,6 +73,7 @@ namespace Sunnyland.GameFramework
 		public Vector2[] Scale = new Vector2[capacity];
 		public SpriteEffects[] SpriteEffects = new SpriteEffects[capacity];
 		public float[] LayerDepth = new float[capacity];
+		public bool[] IsActive = new bool[capacity];
 	}
 
 	public struct RenderableDataInstance()
@@ -86,6 +88,8 @@ namespace Sunnyland.GameFramework
 		public Vector2 Scale = Vector2.One;
 		public SpriteEffects SpriteEffects = SpriteEffects.None;
 		public float LayerDepth = .5f;
+
+		public bool IsActive = true;
 
 	}
 }

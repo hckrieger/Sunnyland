@@ -246,6 +246,17 @@ namespace Sunnyland
 			base.Update(gameTime);
 
 
+			collisionSystem.CheckOneToManyCollision("Player", "Gem", args =>
+			{
+				renderSystem.Data.IsActive[args.ManyId] = false;
+			});
+
+	
+			collisionSystem.CheckOneToManyCollision("Player", "cherry", args =>
+			{
+				renderSystem.Data.IsActive[args.ManyId] = false;
+			});
+
 		
 		}
 

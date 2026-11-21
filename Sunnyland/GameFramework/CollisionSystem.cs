@@ -32,22 +32,7 @@ namespace Sunnyland.GameFramework
 
 		}
 
-		//private void CheckCollisions(object sender, CollisionEventArgs e)
-		//{
-		//	var collisionList = collisions.Values.ToList();
-		//	for (int i = 0; i < collisionList.Count; i++)
-		//	{
-		//		for (int j = i + 1; j < collisionList.Count; j++)
-		//		{
-		//			Rectangle bounds1 = GetCollisionBounds(e.BoundingBox1.Id);
-		//			Rectangle bounds2 = GetCollisionBounds(e.BoundingBox2.Id);
-		//			if (bounds1.Intersects(bounds2))
-		//			{
-		//				HandleCollision.Invoke(sender, e);
-		//			}
-		//		}
-		//	}
-		//}
+
 
 		public void InitializeCollision(string name, int id, Rectangle bounds)
 		{
@@ -102,7 +87,7 @@ namespace Sunnyland.GameFramework
 
 
 
-		public void CheckOneToManyCollision(string boxName, string multipleBoxes, Action execution)
+		public void CheckOneToManyCollision(string boxName, string multipleBoxes, Action<CollisionEventArgs> execution)
 		{
 			var collision = collisions.FirstOrDefault(c => c.Key == boxName);
 
@@ -116,9 +101,11 @@ namespace Sunnyland.GameFramework
 				Rectangle bbox2 = GetBoundingBox(otherCollision.Id);
 
 				if (bbox1.Intersects(bbox2))
-					execution?.Invoke();
+					  execution?.Invoke(new CollisionEventArgs(collision.Id, otherCollision.Id));
+
 				
 			}
+
 
 		}
 
