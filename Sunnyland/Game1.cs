@@ -25,7 +25,7 @@ namespace Sunnyland
 		public Dictionary<string, List<TileObject>> ObjectData = new Dictionary<string, List<TileObject>>();
 		private RenderSystem renderSystem;
 
-		private DataCache<Texture2D> textureCache;
+		private AssetCache<Texture2D> textureCache;
 
 		private PlayerController playerController;
 		private Rectangle winRectangleTrigger;
@@ -33,6 +33,8 @@ namespace Sunnyland
 		private CollisionSystem collisionSystem;
 
 		private Dictionary<string, List<TileObject>> gameObjects = new Dictionary<string, List<TileObject>>();
+
+		AssetCache<Texture2D> assetCache;
 
 		private int score = 0;
 
@@ -101,14 +103,14 @@ namespace Sunnyland
 			CurrentGameState = GameState.IsPlaying;
 
 			tilemapManager = new TilemapManager("Data/tilemaps/level.json", Content);
-			textureCache = new DataCache<Texture2D>(Content.Load<Texture2D>);
-			renderSystem = new RenderSystem(24, textureCache);
+			textureCache = new AssetCache<Texture2D>(Content.Load<Texture2D>);
+			renderSystem = new RenderSystem(24, this);
 			inputManager = new InputManager(displayManager, InputManager.BindingType.Platformer);
 			collisionSystem = new CollisionSystem(renderSystem);
 
 			Services.AddService(typeof(TilemapManager), tilemapManager);	
 			Services.AddService(typeof(RenderSystem), renderSystem);
-			Services.AddService(typeof(DataCache<Texture2D>), textureCache);
+			Services.AddService(typeof(AssetCache<Texture2D>), textureCache);
 			Services.AddService(typeof(InputManager), inputManager);
 			Services.AddService(typeof(CollisionSystem), collisionSystem);
 

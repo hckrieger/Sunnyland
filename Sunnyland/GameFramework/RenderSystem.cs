@@ -16,14 +16,14 @@ namespace Sunnyland.GameFramework
 		public RenderableData Data => renderableData;
 		private int index = 0;
 
-		DataCache<Texture2D> assetCache;
+		AssetCache<Texture2D> textureCache;
 
 
-		public RenderSystem(int capacity, DataCache<Texture2D> assetCache)
+		public RenderSystem(int capacity, Game game)
 		{
 			this.capacity = capacity;
 			renderableData = new RenderableData(capacity);
-			this.assetCache = assetCache;
+			textureCache = game.Services.GetService<AssetCache<Texture2D>>();
 
 		}
 
@@ -55,7 +55,7 @@ namespace Sunnyland.GameFramework
 				if (renderableData.TextureName[i] != null && renderableData.IsActive[i])
 				{
 					
-					var texture = assetCache.GetData(renderableData.TextureName[i]);
+					var texture = textureCache.GetData(renderableData.TextureName[i]);
 					spriteBatch.Draw(texture, Vector2.Round(renderableData.Position[i]), renderableData.SourceRectangle[i], renderableData.Color[i], renderableData.Rotation[i], renderableData.Origin[i], renderableData.Scale[i], renderableData.SpriteEffects[i], renderableData.LayerDepth[i]);
 				}
 			}

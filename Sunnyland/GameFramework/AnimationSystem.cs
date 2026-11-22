@@ -10,13 +10,13 @@ namespace Sunnyland.GameFramework
 	{
 		private Dictionary<string, Animation> animations = new Dictionary<string, Animation>();
 
-		private DataCache<Texture2D> textureCache;
+		private AssetCache<Texture2D> textureCache;
 		private RenderSystem renderSystem;
 
 
 		public AnimationSystem(Game game)
 		{
-			textureCache = game.Services.GetService<DataCache<Texture2D>>();
+			textureCache = game.Services.GetService<AssetCache<Texture2D>>();
 			renderSystem = game.Services.GetService<RenderSystem>();
 		}
 

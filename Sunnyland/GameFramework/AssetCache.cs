@@ -6,16 +6,21 @@ using System.Threading.Tasks;
 
 namespace Sunnyland.GameFramework
 {
-	public class DataCache<TAsset>
+	public class AssetCache<TAsset>
 	{
 
 		private Dictionary<string, TAsset> assets;
 		private Func<string, TAsset> methodOfAccess;
 
-		public DataCache(Func<string, TAsset> methodOfAccess)
+		public AssetCache(Func<string, TAsset> methodOfAccess)
 		{
 			assets = new Dictionary<string, TAsset>();
 			this.methodOfAccess = methodOfAccess;
+		}
+
+		public List<TAsset> GetALl()
+		{
+			return assets.Values.ToList();
 		}
 
 
