@@ -158,7 +158,6 @@ namespace Sunnyland
 
 			HandleTileCollision(previousPosition);
 
-			Debug.WriteLine($"----{BoundingBoxForCollision}");
 
 
 			

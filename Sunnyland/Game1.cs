@@ -34,7 +34,17 @@ namespace Sunnyland
 
 		private Dictionary<string, List<TileObject>> gameObjects = new Dictionary<string, List<TileObject>>();
 
+		private int score = 0;
 
+		public int Score
+		{
+			get => score;
+			set
+			{
+				score = value;
+				Debug.WriteLine($"Score: {score}");
+			}
+		}
 
 		public enum GameState
 		{
@@ -249,15 +259,18 @@ namespace Sunnyland
 			collisionSystem.CheckOneToManyCollision("Player", "Gem", args =>
 			{
 				renderSystem.Data.IsActive[args.ManyId] = false;
+				Score += 100;
 			});
 
 	
 			collisionSystem.CheckOneToManyCollision("Player", "cherry", args =>
 			{
 				renderSystem.Data.IsActive[args.ManyId] = false;
+				Score += 50;
 			});
 
-		
+
+
 		}
 
 		protected override void Draw(GameTime gameTime)

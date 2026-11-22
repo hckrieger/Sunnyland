@@ -100,8 +100,12 @@ namespace Sunnyland.GameFramework
 			{
 				Rectangle bbox2 = GetBoundingBox(otherCollision.Id);
 
-				if (bbox1.Intersects(bbox2))
-					  execution?.Invoke(new CollisionEventArgs(collision.Id, otherCollision.Id));
+				if (bbox1.Intersects(bbox2) && !otherCollision.CollisionResolved)
+				{
+					execution?.Invoke(new CollisionEventArgs(collision.Id, otherCollision.Id));
+					otherCollision.CollisionResolved = true;
+				}
+					  
 
 				
 			}
@@ -127,6 +131,8 @@ namespace Sunnyland.GameFramework
 			Width = localBounds.Width;
 			Height = localBounds.Height;
 		}
+
+		public bool CollisionResolved { get; set; } = false;
 
 		public string Key { get; set; }
 		public int Id { get; set; }
