@@ -96,7 +96,7 @@ namespace Sunnyland
 			// TODO: Add your initialization logic here
 			displayManager = new DisplayManager(_graphics)
 			{
-				IsFullScreen = false
+				IsFullScreen = true
 			};
 
 			SetWindowSize(384, 240, 3);
@@ -104,13 +104,15 @@ namespace Sunnyland
 
 			tilemapManager = new TilemapManager("Data/tilemaps/level.json", Content);
 			textureCache = new AssetCache<Texture2D>(Content.Load<Texture2D>);
+			Services.AddService(typeof(AssetCache<Texture2D>), textureCache);
+
 			renderSystem = new RenderSystem(24, this);
 			inputManager = new InputManager(displayManager, InputManager.BindingType.Platformer);
 			collisionSystem = new CollisionSystem(renderSystem);
 
 			Services.AddService(typeof(TilemapManager), tilemapManager);	
 			Services.AddService(typeof(RenderSystem), renderSystem);
-			Services.AddService(typeof(AssetCache<Texture2D>), textureCache);
+			
 			Services.AddService(typeof(InputManager), inputManager);
 			Services.AddService(typeof(CollisionSystem), collisionSystem);
 
